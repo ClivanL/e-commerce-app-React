@@ -5,19 +5,25 @@ interface productTypes {
     name:string,
     price:number,
     category:string,
-    description:string
+    description:string,
+    imgUrl:string
 }
 
 function Catalog(){
     return <>
     <Navbar/>
-    <ul>List of products</ul>
+    <h1>List of products</h1>
     {products.map((item:productTypes)=>{
         return <>
-        <li>{item.name}</li>
+        <ul>{item.name}</ul>
         <li>${item.price}</li>
         <li>{item.category}</li>
         <li>{item.description}</li>
+        <img src={item.imgUrl} />
+        <br></br>
+        <button>Add to Cart</button>
+        <button>Buy now</button>
+        <button>Like</button>
         </>
     })}
     </>
