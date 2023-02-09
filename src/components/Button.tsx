@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom"
 
 const Button = (props:any) => {
-
     const navigate=useNavigate()
     const moveToPage=(dest:String)=>{
         navigate(`/${dest}`)
