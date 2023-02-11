@@ -33,7 +33,7 @@ function Navbar(){
             <div onClick={()=>moveToPage("catalog")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
             </li>
         <li>
-        <Button label="List new product">
+        <Button label="List new product" dest="newproduct">
           Get Started
         </Button>
         </li>
