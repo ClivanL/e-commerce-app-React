@@ -28,7 +28,7 @@ function Catalog({productList}:any){
         </div>
     })}
 
-    <div>NEWLY LISTED!:</div>
+    <h2>NEWLY LISTED!: </h2>
     {productList.map((item:productTypes)=>{
         return <div>
         <ul>{item.name}</ul>
