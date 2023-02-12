@@ -3,7 +3,7 @@ import Button from "./Button";
 import {useState} from 'react'
 import {IonIcon} from "react-ion-icon"
 
-function Navbar({setLogin}:any){
+function NavbarNoLogin(){
     let [open,setOpen]=useState(false);
     const navigate=useNavigate();
     const moveToPage=(dest:String)=>{
@@ -33,10 +33,7 @@ function Navbar({setLogin}:any){
             <div onClick={()=>moveToPage("catalog")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
             </li>
         <li>
-        <Button label="List new product" dest="newproduct">
-          Get Started
-        </Button>
-        <Button label="Logout" dest="" setLogin={setLogin}>
+        <Button label="Login" dest="login">
           Get Started
         </Button>
         </li>
@@ -52,4 +49,4 @@ function Navbar({setLogin}:any){
     </>)
 }
 
-export default Navbar
+export default NavbarNoLogin

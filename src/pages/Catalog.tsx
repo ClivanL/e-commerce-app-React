@@ -10,12 +10,12 @@ interface productTypes {
     imgUrl:string
 }
 
-function Catalog({productList}:any){
+function Catalog({productList, setLogin}:any){
     return <>
-    <Navbar/>
+    <Navbar setLogin={setLogin}/>
     <h1>List of products</h1>
     {products.map((item:productTypes)=>{
-        return <div>
+        return <div key={item.name}>
         <ul>{item.name}</ul>
         <li>${item.price}</li>
         <li>{item.category}</li>
@@ -30,7 +30,7 @@ function Catalog({productList}:any){
 
     <h2>NEWLY LISTED!: </h2>
     {productList.map((item:productTypes)=>{
-        return <div>
+        return <div key={item.name}>
         <ul>{item.name}</ul>
         <li>${item.price}</li>
         <li>{item.category}</li>

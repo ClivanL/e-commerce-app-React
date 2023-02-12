@@ -1,10 +1,12 @@
 import Navbar from "../components/Navbar"
-import { Outlet } from "react-router-dom"
 import Button from "../components/Button"
+import NavbarNoLogin from "../components/NavBarNoLogin"
 
-function Home(){
+function Home({login, setLogin}:any){
     return(<>
-    <Navbar/>
+    {(login)?
+    <div>
+    <Navbar setLogin={setLogin}/>
     This is the start of the app. 
     <h1 className="text-4xl font-bold underline">
     Hello user!
@@ -13,6 +15,13 @@ function Home(){
     Click the buttons to begin buying or selling:
     <Button label="BUY" dest="newproduct"/>
     <Button label="SELL" dest="catalog"/>
+    </div>
+    :
+    <div>
+    <NavbarNoLogin/>
+    <p>Please login to view page</p>
+    <Button label="Go to login page" dest="login"/>
+    </div>}
     </>)
 }
 
