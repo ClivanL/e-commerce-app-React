@@ -30,7 +30,7 @@ function Navbar({setLogin}:any){
               <div onClick={()=>moveToPage("")} className='text-gray-800 hover:text-gray-400 duration-500'>Home</div>
             </li>
             <li key="Testing2" className='md:ml-8 text-xl md:my-0 my-7'>
-            <div onClick={()=>moveToPage("catalog")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
+            <div onClick={()=>moveToPage("category")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
             </li>
         <li>
         <Button label="List new product" dest="newproduct">

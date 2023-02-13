@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import products from "../../products.json"
-import { ReactPropTypes } from "react";
+import {useParams} from 'react-router-dom'
 
 interface productTypes {
     name:string,
@@ -11,10 +11,14 @@ interface productTypes {
 }
 
 function Catalog({productList, setLogin}:any){
+    const {choice} = useParams();
     return <>
     <Navbar setLogin={setLogin}/>
     <h1>List of products</h1>
-    {products.map((item:productTypes)=>{
+    <h2>Choice of category: {choice}</h2>
+    {products.filter((item:productTypes)=>{
+        return item.category===choice;
+    }).map((item:productTypes)=>{
         return <div key={item.name}>
         <ul>{item.name}</ul>
         <li>${item.price}</li>

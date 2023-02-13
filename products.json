@@ -1,15 +1,22 @@
 [{
     "name":"kitkat",
     "price":30,
-    "category":"snacks",
+    "category":"Snacks",
     "description": "have a break, have a kitkat",
     "imgUrl":"undefined"
  },
  {
     "name":"cadburry",
     "price":2.50,
-    "category":"snacks",
+    "category":"Snacks",
     "description": "better than a kitkat",
     "imgUrl":"undefined"
- }
+ },
+ {
+   "name":"Skittles",
+   "price":0.50,
+   "category":"Candies",
+   "description": "taste the rainbow",
+   "imgUrl":"undefined"
+}
 ]

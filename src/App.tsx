@@ -7,6 +7,7 @@ import NoPage from './pages/NoPage';
 import Catalog from './pages/Catalog';
 import NewProduct from './pages/NewProduct';
 import Login from './pages/Login';
+import Category from './pages/Category';
 
 interface productTypes {
   name:string,
@@ -29,7 +30,9 @@ function App(){
       <BrowserRouter>
       <Routes>
       <Route path="/" element={<Home login={login} setLogin={setLogin}/>}/>
-      <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} />
+      <Route path="/category" element={<Category setLogin={setLogin}/>}/>
+      <Route path="/category/:choice" element={<Catalog productList={productList} setLogin={setLogin}/>}/>
+      {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} setLogin={setLogin}/>} />
       <Route path="/login" element={<Login setLogin={setLogin}/>}/>
       <Route path="*" element={<NoPage />} />

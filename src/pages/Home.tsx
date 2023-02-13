@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar"
 import Button from "../components/Button"
-import NavbarNoLogin from "../components/NavBarNoLogin"
+import NavbarNoLogin from "../components/NavbarNoLogin"
 
 function Home({login, setLogin}:any){
     return(<>
@@ -13,8 +13,8 @@ function Home({login, setLogin}:any){
     </h1>
     <br></br>
     Click the buttons to begin buying or selling:
-    <Button label="BUY" dest="newproduct"/>
-    <Button label="SELL" dest="catalog"/>
+    <Button label="BUY" dest="catalog"/>
+    <Button label="SELL" dest="newproduct"/>
     </div>
     :
     <div>
