@@ -17,7 +17,8 @@ function Catalog({productList, setLogin}:any){
     <h1>List of products</h1>
     <h2>Choice of category: {choice}</h2>
     {products.filter((item:productTypes)=>{
-        return item.category===choice;
+        //return item.category===choice;
+        return choice!=="all"?item.category===choice:true;
     }).map((item:productTypes)=>{
         return <div key={item.name}>
         <ul>{item.name}</ul>
