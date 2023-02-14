@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 
 function Category({setLogin}:any){
 
-    const categories=["Snacks", "Candies", "Toys"]
+    const categories=["all","Snacks", "Candies", "Toys"]
     const location=useLocation();
     const navigate=useNavigate();
     const handleClick=(item:string)=>{
