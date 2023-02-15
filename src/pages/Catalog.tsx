@@ -1,8 +1,9 @@
 import Navbar from "../components/Navbar";
 import products from "../../products.json"
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 interface productTypes {
+    id:number;
     name:string,
     price:number,
     category:string,
@@ -12,6 +13,10 @@ interface productTypes {
 
 function Catalog({productList, setLogin}:any){
     const {choice} = useParams();
+    const navigate=useNavigate();
+    const handleClick=(dest:number)=>{
+        navigate(dest.toString());
+    }
     return <>
     <Navbar setLogin={setLogin}/>
     <h1>List of products</h1>
@@ -27,9 +32,12 @@ function Catalog({productList, setLogin}:any){
         <li>{item.description}</li>
         <img src={item.imgUrl} />
         <br></br>
+        <div>
         <button>Add to Cart</button>
         <button>Buy now</button>
         <button>Like</button>
+        </div>
+        <button onClick={()=>handleClick(item.id)}><b>More details</b></button>
         </div>
     })}
 
@@ -42,9 +50,12 @@ function Catalog({productList, setLogin}:any){
         <li>{item.description}</li>
         <img src={item.imgUrl} />
         <br></br>
+        <div>
         <button>Add to Cart</button>
         <button>Buy now</button>
         <button>Like</button>
+        </div>
+        <button><b>More details</b></button>
         </div>
     })}
 

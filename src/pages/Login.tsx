@@ -1,6 +1,5 @@
-import React, { ReactComponentElement, ReactNode } from "react";
 import {useNavigate} from 'react-router-dom'
-import NavbarNoLogin from "../components/NavBarNoLogin";
+import NavbarNoLogin from "../components/NavbarNoLogin";
 
 function Login({setLogin}:any){
     const navigate=useNavigate();

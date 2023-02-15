@@ -1,10 +1,9 @@
-import {useLocation,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Navbar from '../components/Navbar';
 
 function Category({setLogin}:any){
 
     const categories=["all","Snacks", "Candies", "Toys"]
-    const location=useLocation();
     const navigate=useNavigate();
     const handleClick=(item:string)=>{
         navigate(item);

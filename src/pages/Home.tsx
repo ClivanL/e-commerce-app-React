@@ -13,7 +13,7 @@ function Home({login, setLogin}:any){
     </h1>
     <br></br>
     Click the buttons to begin buying or selling:
-    <Button label="BUY" dest="catalog"/>
+    <Button label="BUY" dest="category"/>
     <Button label="SELL" dest="newproduct"/>
     </div>
     :
