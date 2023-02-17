@@ -4,7 +4,6 @@ function CategoryCard({cat}:any){
 
     const navigate=useNavigate();
     const handleClick=(dest:string)=>{
-        console.log("hi")
         navigate(dest);
     }
 

@@ -1,20 +1,18 @@
-import {useNavigate} from 'react-router-dom'
+import CategoryCard from '../components/CategoryCard';
 import Navbar from '../components/Navbar';
 
-function Category({setLogin}:any){
+function Category({setLogin, categories}:any){
 
-    const categories=["all","Snacks", "Candies", "Toys"]
-    const navigate=useNavigate();
-    const handleClick=(item:string)=>{
-        navigate(item);
-    }
+    
 
     return <>
     <Navbar setLogin={setLogin}/>
     <h1>Categories list here-cards</h1>
     <div>
-    {categories.map((item)=>
-    <button onClick={()=>handleClick(item)} key={item}>{item}</button>
+    {categories.map((item:any)=>
+    <div key={item} >
+        <CategoryCard cat={item}/>
+    </div>
     )}
     </div>
     </>

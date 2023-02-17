@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import Navbar from '../components/Navbar';
 
 
-function NewProduct({handleAddProduct}:any){
+function NewProduct({handleAddProduct, categories}:any){
 
 const navigate=useNavigate();
 
@@ -20,7 +20,7 @@ const handleSubmit=(e:any)=>{
     console.log("clicked");
     handleAddProduct(product);
     alert("new product added");
-    navigate("/catalog")
+    navigate("/category")
 
 }
 
@@ -71,10 +71,21 @@ const handleSubmit=(e:any)=>{
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category:</label>
           <div className="mt-1">
           <input id="category" type="text" value={product.category} onChange={(e)=>setProduct({...product,category:e.target.value})}/>
+          </div>
+        </div> */}
+
+        <div>
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
+          <div className="mt-1">
+            <select name="category" id="company-size" className="" value={product.category} onChange={(e)=>setProduct({...product,category:e.target.value})}>
+              <option value="">Please select</option>
+              {categories.filter((item:any)=>item!=="All products").map((item:any)=>
+              <option value={item}>{item}</option>)}
+            </select>
           </div>
         </div>
 

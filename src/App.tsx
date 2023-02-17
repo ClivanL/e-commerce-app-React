@@ -25,17 +25,18 @@ function App(){
   const handleAddProduct=(newProduct:productTypes)=>{
     setProductList([...productList,newProduct])
   }
+  const categories=["All products","Snacks", "Candies", "Toys"]
 
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
       <Route path="/" element={<Home login={login} setLogin={setLogin}/>}/>
-      <Route path="/category" element={<Category setLogin={setLogin}/>}/>
+      <Route path="/category" element={<Category setLogin={setLogin} categories={categories}/>}/>
       <Route path="/category/:choice" element={<Catalog productList={productList} setLogin={setLogin}/>}/>
       <Route path="/category/:choice/:productid" element={<Product setLogin={setLogin}/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
-      <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} setLogin={setLogin}/>} />
+      <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} setLogin={setLogin} categories={categories}/>} />
       <Route path="/login" element={<Login setLogin={setLogin}/>}/>
       <Route path="*" element={<NoPage />} />
 
