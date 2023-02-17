@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import products from "../../products.json"
 import {useParams, useNavigate} from 'react-router-dom'
+import ListCard from "../components/ListCard";
 
 interface productTypes {
     id:number;
@@ -25,36 +26,14 @@ function Catalog({productList, setLogin}:any){
         return choice!=="All products"?item.category===choice:true;
     }).map((item:productTypes)=>{
         return <div key={item.name}>
-        <ul>{item.name}</ul>
-        <li>${item.price}</li>
-        <li>{item.category}</li>
-        <li>{item.description}</li>
-        <img src={item.imgUrl} />
-        <br></br>
-        <div>
-        <button>Add to Cart</button>
-        <button>Buy now</button>
-        <button>Like</button>
-        </div>
-        <button onClick={()=>handleClick(item.id)}><b>More details</b></button>
+        <ListCard item={item}/>
         </div>
     })}
 
     <h2>NEWLY LISTED!: </h2>
     {productList.map((item:productTypes)=>{
         return <div key={item.name}>
-        <ul>{item.name}</ul>
-        <li>${item.price}</li>
-        <li>{item.category}</li>
-        <li>{item.description}</li>
-        <img src={item.imgUrl} />
-        <br></br>
-        <div>
-        <button>Add to Cart</button>
-        <button>Buy now</button>
-        <button>Like</button>
-        </div>
-        <button><b>More details</b></button>
+        <ListCard item={item}/>
         </div>
     })}
 
