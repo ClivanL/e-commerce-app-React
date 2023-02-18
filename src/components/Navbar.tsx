@@ -33,12 +33,9 @@ function Navbar({setLogin}:any){
             <div onClick={()=>moveToPage("category")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
             </li>
         <li>
-        <Button label="List new product" dest="newproduct">
-          Get Started
-        </Button>
-        <Button label="Logout" dest="" setLogin={setLogin}>
-          Get Started
-        </Button>
+        <Button label="List new product" dest="newproduct"/>
+        <Button label="View Cart" dest="mycart"/>
+        <Button label="Logout" dest="" setLogin={setLogin}/>
         </li>
       </ul>
       </div>

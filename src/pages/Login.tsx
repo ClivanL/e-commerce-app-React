@@ -32,7 +32,7 @@ function Login({setLogin}:any){
     
     </div>
     <p>Don't have an account?</p>
-    <button>Register</button>
+    <button onClick={()=>navigate("/signup")}>Register</button>
     </>)
 }
 
