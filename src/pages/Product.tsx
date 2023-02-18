@@ -1,9 +1,8 @@
 import {useParams} from 'react-router-dom'
-import { isInputElement } from 'react-router-dom/dist/dom';
 import products from '../../products.json'
 import Navbar from '../components/Navbar';
 
-function Product({setLogin}:any){
+function Product({setLogin,addToCart}:any){
     const {productid} = useParams();
     return <>
         <Navbar setLogin={setLogin}/>
@@ -14,7 +13,7 @@ function Product({setLogin}:any){
                 <li>{item.category}</li>
                 <li>{item.description}</li>
             </ul><img src={item.imgUrl} />
-        <button>Add to Cart</button>
+        <button onClick={()=>addToCart(item)}>Add to Cart</button>
         <button>Buy now</button>
         <button>Like</button>
             

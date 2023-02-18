@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import products from "../../products.json"
-import {useParams, useNavigate} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import ListCard from "../components/ListCard";
 
 interface productTypes {
@@ -12,12 +12,8 @@ interface productTypes {
     imgUrl:string
 }
 
-function Catalog({productList, setLogin}:any){
+function Catalog({productList, setLogin, addToCart}:any){
     const {choice} = useParams();
-    const navigate=useNavigate();
-    const handleClick=(dest:number)=>{
-        navigate(dest.toString());
-    }
     return <>
     <Navbar setLogin={setLogin}/>
     <h1>List of products</h1>
@@ -26,14 +22,14 @@ function Catalog({productList, setLogin}:any){
         return choice!=="All products"?item.category===choice:true;
     }).map((item:productTypes)=>{
         return <div key={item.name}>
-        <ListCard item={item}/>
+        <ListCard item={item} addToCart={addToCart}/>
         </div>
     })}
 
     <h2>NEWLY LISTED!: </h2>
     {productList.map((item:productTypes)=>{
         return <div key={item.name}>
-        <ListCard item={item}/>
+        <ListCard item={item} addToCart={addToCart}/>
         </div>
     })}
 
