@@ -22,9 +22,13 @@ function Home(){
     :
     <div>
     <NavbarNoLogin/>
+    <div className="y-auto">
     <p>Please login to view page</p>
     <Button label="Go to login page" dest="login"/>
-    </div>}
+    </div>
+    </div>
+    
+    }
     </>)
 }
 

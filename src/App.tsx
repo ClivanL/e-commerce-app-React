@@ -50,7 +50,7 @@ function App(){
   const categories=["All products","Snacks", "Candies", "Toys"]
 
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
       <LoginContext.Provider value={{login, setLogin}}>
       <Routes>
