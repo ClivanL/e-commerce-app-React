@@ -33,9 +33,7 @@ function NavbarNoLogin(){
             <div onClick={()=>moveToPage("category")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
             </li>
         <li>
-        <Button label="Login" dest="login">
-          Get Started
-        </Button>
+        <Button label="Login/Register" dest="login"/>
         </li>
       </ul>
       </div>

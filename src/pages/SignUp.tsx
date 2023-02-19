@@ -1,9 +1,11 @@
 import {useState} from 'react'
 import Navbar from '../components/Navbar';
+import {useNavigate} from 'react-router-dom'
 
 function SignUp({addNewAccount}:any){
 
     const [register,setRegister]=useState({"fullname":"","username":"","email":"", "password":"", "confirmpassword":""});
+    const navigate=useNavigate();
 
     return <>
     <Navbar/>
@@ -14,7 +16,7 @@ function SignUp({addNewAccount}:any){
                     <h1 className="mb-8 text-3xl text-center">Sign up</h1>
                     <div className="text-grey-dark mt-6">
                     Already have an account?&nbsp; 
-                    <a className="no-underline border-b border-blue text-blue-600" href="../login/">
+                    <a className="no-underline border-b border-blue text-blue-600" onClick={()=>navigate('/login')}>
                         Log in
                     </a>.
                 </div>
