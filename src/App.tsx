@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, createContext} from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home'
@@ -28,6 +27,8 @@ interface userAccountTypes{
   productsId:[]
 }
 
+export const LoginContext= createContext<any>(null);
+
 function App(){
   const [productList, setProductList] = useState<productTypes[]>([])
   const [login, setLogin]=useState(false)
@@ -51,19 +52,20 @@ function App(){
   return (
     <div className="App">
       <BrowserRouter>
+      <LoginContext.Provider value={{login, setLogin}}>
       <Routes>
-      <Route path="/" element={<Home login={login} setLogin={setLogin}/>}/>
-      <Route path="/category" element={<Category setLogin={setLogin} categories={categories}/>}/>
-      <Route path="/category/:choice" element={<Catalog productList={productList} setLogin={setLogin} addToCart={addToCart}/>}/>
-      <Route path="/category/:choice/:productid" element={<Product setLogin={setLogin} addToCart={addToCart}/>}/>
-      <Route path="/mycart" element={<Cart setLogin={setLogin} cart={cart}/>}/>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/category" element={<Category categories={categories}/>}/>
+      <Route path="/category/:choice" element={<Catalog productList={productList} addToCart={addToCart}/>}/>
+      <Route path="/category/:choice/:productid" element={<Product addToCart={addToCart}/>}/>
+      <Route path="/mycart" element={<Cart cart={cart}/>}/>
       <Route path="/signup" element={<SignUp addNewAccount={addNewAccount}/>} />
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
-      <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} setLogin={setLogin} categories={categories}/>} />
-      <Route path="/login" element={<Login setLogin={setLogin}/>}/>
+      <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} categories={categories}/>} />
+      <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<NoPage />} />
-
       </Routes>
+      </LoginContext.Provider>
       </BrowserRouter>
     </div>
   )

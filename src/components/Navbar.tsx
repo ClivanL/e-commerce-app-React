@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {IonIcon} from "react-ion-icon"
+import { LoginContext } from "../App";
 
-function Navbar({setLogin}:any){
+function Navbar(){
     let [open,setOpen]=useState(false);
     const navigate=useNavigate();
     const moveToPage=(dest:String)=>{
         navigate(`/${dest}`)
     }
+    const {setLogin}=useContext(LoginContext)
     return (<>
     {/* navigation bar here. */}
     <div className='shadow-md w-full fixed top-0 left-0'>

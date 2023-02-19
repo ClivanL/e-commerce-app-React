@@ -2,10 +2,10 @@ import {useParams} from 'react-router-dom'
 import products from '../../products.json'
 import Navbar from '../components/Navbar';
 
-function Product({setLogin,addToCart}:any){
+function Product({addToCart}:any){
     const {productid} = useParams();
     return <>
-        <Navbar setLogin={setLogin}/>
+        <Navbar />
         {productid && products.filter((item)=>item.id===parseInt(productid)).map((item)=>
         <div key={item.id}><ul>
                 <li>{item.name}</li>

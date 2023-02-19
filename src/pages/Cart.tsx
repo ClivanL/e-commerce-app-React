@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar";
 
-function Cart({setLogin, cart}:any){
+function Cart({cart}:any){
     return <>
-    <Navbar setLogin={setLogin}/>
+    <Navbar/>
     <h1>My cart</h1>
     <table>
     <tbody>

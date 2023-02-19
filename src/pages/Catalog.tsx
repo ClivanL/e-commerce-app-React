@@ -12,10 +12,10 @@ interface productTypes {
     imgUrl:string
 }
 
-function Catalog({productList, setLogin, addToCart}:any){
+function Catalog({productList, addToCart}:any){
     const {choice} = useParams();
     return <>
-    <Navbar setLogin={setLogin}/>
+    <Navbar/>
     <h1>List of products</h1>
     <h2>Choice of category: {choice}</h2>
     {products.filter((item:productTypes)=>{

@@ -1,10 +1,13 @@
 import {useNavigate} from 'react-router-dom'
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import users from '../../userAccounts.json'
+import { LoginContext } from '../App';
+import {useContext} from 'react'
 
-function Login({setLogin}:any){
+function Login(){
 
     const navigate=useNavigate();
+    const {setLogin}=useContext(LoginContext)
     const handleLogin=(event:any)=>{
         event.preventDefault();
         console.log(event.target.username.value);
