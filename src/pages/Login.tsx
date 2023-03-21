@@ -8,18 +8,31 @@ function Login(){
 
     const navigate=useNavigate();
     const {setLogin}=useContext(LoginContext)
-    const handleLogin=(event:any)=>{
+    const handleLogin =(event:any)=>{
         event.preventDefault();
-        console.log(event.target.username.value);
-        const condition=users.filter((item)=>item.username===event.target.username.value && item.password===event.target.password.value)
-        console.log(condition)
-        if (condition.length!==0){
+        // console.log(event.target.username.value);
+        // const condition=users.filter((item)=>item.username===event.target.username.value && item.password===event.target.password.value)
+        // console.log(condition)
+        fetch(`http://localhost:15555/home/login`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify({
+                "username":event.target.username.value,
+                "password":event.target.password.value
+            })
+    }).then((response)=>response.json())
+    .then((data)=>{
+        if (data.sessionToken){
             setLogin(true);
             navigate("/");
         }
         else{
             alert("Username or password is wrong. Please re-enter.")
         }
+
+    })
 
 
     }
