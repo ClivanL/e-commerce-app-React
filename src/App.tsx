@@ -28,12 +28,14 @@ interface userAccountTypes{
 }
 
 export const LoginContext= createContext<any>(null);
+export const SessionContext=createContext<any>(null);
 
 function App(){
   const [productList, setProductList] = useState<productTypes[]>([])
   const [login, setLogin]=useState(false)
   const [cart,setCart]=useState<productTypes[]>([])
   const [userAccounts, setUserAccounts]=useState<userAccountTypes[]>([])
+  const [sessionToken, setSessionToken]=useState("")
 
   const handleAddProduct=(newProduct:productTypes)=>{
     setProductList([...productList,newProduct])
@@ -53,6 +55,7 @@ function App(){
     <div>
       <BrowserRouter>
       <LoginContext.Provider value={{login, setLogin}}>
+      <SessionContext.Provider value={{sessionToken,setSessionToken}}>
       <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/category" element={<Category categories={categories}/>}/>
@@ -65,6 +68,7 @@ function App(){
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<NoPage />} />
       </Routes>
+      </SessionContext.Provider>
       </LoginContext.Provider>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 import NavbarNoLogin from "../components/NavbarNoLogin";
-import users from '../../userAccounts.json'
+import { SessionContext } from '../App';
 import { LoginContext } from '../App';
 import {useContext} from 'react'
 
@@ -8,6 +8,7 @@ function Login(){
 
     const navigate=useNavigate();
     const {setLogin}=useContext(LoginContext)
+    const {setSessionToken}=useContext(SessionContext)
     const handleLogin =(event:any)=>{
         event.preventDefault();
         // console.log(event.target.username.value);
@@ -24,8 +25,10 @@ function Login(){
             })
     }).then((response)=>response.json())
     .then((data)=>{
-        if (data.sessionToken){
+        if (data.sessToken){
+            console.log(data)
             setLogin(true);
+            setSessionToken(data.sessToken);
             navigate("/");
         }
         else{
