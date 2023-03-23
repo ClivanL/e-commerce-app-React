@@ -16,6 +16,7 @@ function Login(){
         // console.log(condition)
         fetch(`http://localhost:15555/home/login`,{
             method:"POST",
+            credentials: 'include',
             headers:{
                 "Content-Type":"application/json",
             },
@@ -26,10 +27,17 @@ function Login(){
     }).then((response)=>response.json())
     .then((data)=>{
         if (data.sessToken){
-            console.log(data)
             setLogin(true);
             setSessionToken(data.sessToken);
-            navigate("/");
+            fetch(`http://localhost:15555/api/main/retrieveAccountDetails`,{
+                method:"POST",
+                credentials: 'include',
+                headers:{
+                    "Content-Type":"application/json",
+                },
+        }).then((response)=>response.json())
+        .then((data)=>console.log(data))
+            
         }
         else{
             alert("Username or password is wrong. Please re-enter.")
