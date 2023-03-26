@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import useRetrieveDetails from '../hooks/useRetrieveDetails';
 
 
-function NewProduct({handleAddProduct, categories}:any){
+function NewProduct({categories}:any){
 
 const navigate=useNavigate();
 const userDetails=useRetrieveDetails();
@@ -20,9 +20,7 @@ let [product,setProduct]=useState({
 
 async function handleSubmit(e:any){
     e.preventDefault();
-    // console.log("clicked");
-    // handleAddProduct(product);
-    
+ 
 
     fetch(`http://localhost:15555/api/main/item/new`, {
             method: "POST",

@@ -31,15 +31,10 @@ export const LoginContext= createContext<any>(null);
 export const SessionContext=createContext<any>(null);
 
 function App(){
-  const [productList, setProductList] = useState<productTypes[]>([])
   const [login, setLogin]=useState(false)
   const [cart,setCart]=useState<productTypes[]>([])
   const [userAccounts, setUserAccounts]=useState<userAccountTypes[]>([])
   const [sessionToken, setSessionToken]=useState("")
-
-  const handleAddProduct=(newProduct:productTypes)=>{
-    setProductList([...productList,newProduct])
-  }
 
   const addToCart=(newProduct:productTypes)=>{
     setCart([...cart, newProduct])
@@ -59,12 +54,12 @@ function App(){
       <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/category" element={<Category categories={categories}/>}/>
-      <Route path="/category/:choice" element={<Catalog productList={productList} addToCart={addToCart}/>}/>
+      <Route path="/category/:choice" element={<Catalog addToCart={addToCart}/>}/>
       <Route path="/category/:choice/:productid" element={<Product addToCart={addToCart}/>}/>
       <Route path="/mycart" element={<Cart cart={cart}/>}/>
       <Route path="/signup" element={<SignUp addNewAccount={addNewAccount}/>} />
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
-      <Route path="/newproduct" element={<NewProduct handleAddProduct={handleAddProduct} categories={categories}/>} />
+      <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<NoPage />} />
       </Routes>
