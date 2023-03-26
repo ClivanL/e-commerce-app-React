@@ -3,12 +3,12 @@ import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 function Cart({ cart }: any) {
   const userDetails = useRetrieveDetails();
-  console.log(userDetails);
   return (
     <>
       <Navbar />
       <h1>My cart</h1>
       <table>
+        <tbody>
         <tr>
           <th>Item</th>
           <th>Price</th>
@@ -23,6 +23,7 @@ function Cart({ cart }: any) {
             <td>{details.quantity}</td>
           </tr>
         ))}
+        </tbody>
       </table>
     </>
   );

@@ -6,7 +6,7 @@ const Button = (props:any) => {
         navigate(`/${dest}`)
     }
     return (
-      <button onClick={()=>{if(props.setLogin){props.setLogin(false)}
+      <button onClick={()=>{
         moveToPage(props.dest)}} className='bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
       duration-500'>
         {props.label}
