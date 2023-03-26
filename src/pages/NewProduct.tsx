@@ -1,24 +1,38 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Navbar from '../components/Navbar';
+import useRetrieveDetails from '../hooks/useRetrieveDetails';
 
 
 function NewProduct({handleAddProduct, categories}:any){
 
 const navigate=useNavigate();
+const userDetails=useRetrieveDetails();
 
 let [product,setProduct]=useState({
-    name:"",
+    itemName:"",
     price:0,
+    quantity:0,
     category:"",
     description: "",
-    imgUrl:""
+    imageUrl:""
 })
 
-const handleSubmit=(e:any)=>{
+async function handleSubmit(e:any){
     e.preventDefault();
-    console.log("clicked");
-    handleAddProduct(product);
+    // console.log("clicked");
+    // handleAddProduct(product);
+    
+
+    fetch(`http://localhost:15555/api/main/item/new`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({...product, ownerId:userDetails?.userId})
+          })
+
     alert("new product added");
     navigate("/category")
 
@@ -60,7 +74,7 @@ const handleSubmit=(e:any)=>{
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">Product name:</label>
           <div className="mt-1">
-          <input id="name" type="text" value={product.name} onChange={(e)=>setProduct({...product,name:e.target.value})} required/>
+          <input id="name" type="text" value={product.itemName} onChange={(e)=>setProduct({...product,itemName:e.target.value})} required/>
           </div>
         </div>
 
@@ -71,12 +85,12 @@ const handleSubmit=(e:any)=>{
           </div>
         </div>
 
-        {/* <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category:</label>
+        <div>
+          <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Quantity:</label>
           <div className="mt-1">
-          <input id="category" type="text" value={product.category} onChange={(e)=>setProduct({...product,category:e.target.value})}/>
+          <input id="quantity" type="number" value={product.quantity} onChange={(e)=>setProduct({...product,quantity:parseInt(e.target.value)})}/>
           </div>
-        </div> */}
+        </div>
 
         <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
@@ -99,7 +113,7 @@ const handleSubmit=(e:any)=>{
         <div>
           <label htmlFor="imgUrl" className="block text-sm font-medium text-gray-700">image url:</label>
           <div className="mt-1">
-          <input id="imgUrl" type="text" value={product.imgUrl} onChange={(e)=>setProduct({...product,imgUrl:e.target.value})}/>
+          <input id="imgUrl" type="text" value={product.imageUrl} onChange={(e)=>setProduct({...product,imageUrl:e.target.value})}/>
           </div>
         </div>
 

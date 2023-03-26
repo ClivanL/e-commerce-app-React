@@ -12,6 +12,7 @@ interface Item {
 }
 
 interface UserDetails {
+  userId: number,
   email: String;
   carts: Item[];
   name: String;
