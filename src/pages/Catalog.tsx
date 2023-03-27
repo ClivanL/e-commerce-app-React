@@ -5,6 +5,7 @@ import ListCard from "../components/ListCard";
 import { LoginContext } from "../App";
 import { useContext, useEffect, useState } from "react";
 import NavbarNoLogin from "../components/NavbarNoLogin";
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 interface productTypes {
     id:number;
@@ -19,6 +20,8 @@ interface productTypes {
 
 function Catalog({addToCart}:any){
     const [products,setProducts]=useState<productTypes[]>();
+    const [selection, setSelection]=useState();
+    const userDetails=useRetrieveDetails();
     useEffect(()=>{
         fetch(`http://localhost:15555/api/main/item/all`, {
             method: "GET",
@@ -42,7 +45,7 @@ function Catalog({addToCart}:any){
         return choice!=="All products"?item.category===choice:true;
     }).map((item:productTypes)=>{
         return <div key={item.itemName}>
-        <ListCard item={item} addToCart={addToCart}/>
+        <ListCard selection={selection} setSelection={setSelection} item={item} addToCart={addToCart} userId={userDetails?.userId}/>
         </div>
     })}
 
