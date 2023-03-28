@@ -7,7 +7,7 @@ import useRetrieveDetails from '../hooks/useRetrieveDetails';
 function NewProduct({categories}:any){
 
 const navigate=useNavigate();
-const userDetails=useRetrieveDetails();
+const {userDetails}=useRetrieveDetails();
 
 let [product,setProduct]=useState({
     itemName:"",

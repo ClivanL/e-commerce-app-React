@@ -11,10 +11,18 @@ interface Item {
   quantity: number;
 }
 
+interface Cart {
+  id:number;
+  userId:number;
+  itemId:number;
+  quantity:number;
+  item:Item
+}
+
 interface UserDetails {
   userId: number,
   email: String;
-  carts: Item[];
+  carts: Cart[];
   name: String;
   username: String;
 }
@@ -34,5 +42,5 @@ export default function useRetrieveDetails() {
         setUserDetails(data);
       });
   }, []);
-  return userDetails;
+  return {userDetails, setUserDetails};
 }

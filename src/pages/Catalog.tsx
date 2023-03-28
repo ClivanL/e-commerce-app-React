@@ -21,7 +21,7 @@ interface productTypes {
 function Catalog({addToCart}:any){
     const [products,setProducts]=useState<productTypes[]>();
     const [selection, setSelection]=useState();
-    const userDetails=useRetrieveDetails();
+    const {userDetails}=useRetrieveDetails();
     useEffect(()=>{
         fetch(`http://localhost:15555/api/main/item/all`, {
             method: "GET",
