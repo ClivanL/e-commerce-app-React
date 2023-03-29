@@ -26,6 +26,24 @@ function Cart({ cart }: any) {
   // const [cartDetails, setCartDetails]=useState((userDetails)?[...userDetails?.carts]:[]);
   const handleCheckOut=()=>{
     console.log("Check out");
+    fetch(`http://localhost:15555/api/main/cart/checkOutCart`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetails),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if(data){
+          setUserDetails(data);
+        }
+        else{
+          console.log("transaction failed");
+        }
+
+      })
   }
   const handleQuantityChange=(choice:String, itemId:number)=>{
     const newCart:Cart[]=[];
