@@ -36,7 +36,8 @@ function Cart({ cart }: any) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data){
+        if(!data.error){
+          console.log(data);
           setUserDetails(data);
         }
         else{
