@@ -67,14 +67,21 @@ function Cart({ cart }: any) {
     
   }
 
-  const handleDeleteItem=(itemId:number)=>{
+  const handleDeleteItem=(cartId:number)=>{
     const newCart:Cart[]=[];
     userDetails?.carts?.map((ele)=>{
-      if (ele.item.id!==itemId){
+      if (ele.id!==cartId){
         newCart.push({...ele})
       }
     })
-    setUserDetails({...userDetails!,carts:newCart})
+    fetch(`http://localhost:15555/api/main/cart/${cartId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })  
+          setUserDetails({...userDetails!,carts:newCart}) 
   }
   return (
     <>
@@ -95,7 +102,7 @@ function Cart({ cart }: any) {
             <td>{details.item.price}</td>
             <td>{details.item.category}</td>
             <td><button onClick={()=>{handleQuantityChange('-',details.item.id)}}>-</button>{details.quantity}<button onClick={()=>{handleQuantityChange('+', details.item.id)}}>+</button></td>
-            <td><button onClick={()=>handleDeleteItem(details.item.id)}>Delete</button></td>
+            <td><button onClick={()=>handleDeleteItem(details.id)}>Delete</button></td>
           </tr>
         ))}
         </tbody>
