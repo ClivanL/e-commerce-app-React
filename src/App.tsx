@@ -12,6 +12,8 @@ import MyCart from './pages/MyCart';
 import SignUp from './pages/SignUp';
 import Logout from './pages/Logout';
 import CheckOutSuccessful from './pages/CheckOutSuccessful';
+import PurchaseHistory from './pages/PurchaseHistory';
+import SaleHistory from './pages/SaleHistory';
 
 interface productTypes {
   name:string,
@@ -84,6 +86,8 @@ function App(){
       <Route path="/mycart" element={<MyCart cart={cart}/>}/>
       <Route path="/checkout" element={<CheckOutSuccessful/>}/>
       <Route path="/signup" element={<SignUp addNewAccount={addNewAccount}/>} />
+      <Route path="/purchasehistory" element={<PurchaseHistory/>}/>
+      <Route path="/salehistory" element={<SaleHistory/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>
