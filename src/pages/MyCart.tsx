@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
+import { CheckOutContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 interface Item {
   id: number;
@@ -23,9 +25,12 @@ interface Cart {
   item:Item
 }
 
-function Cart({ cart }: any) {
+function MyCart({ cart }: any) {
   const {userDetails, setUserDetails} = useRetrieveDetails();
   // const [cartDetails, setCartDetails]=useState((userDetails)?[...userDetails?.carts]:[]);
+  const navigate=useNavigate();
+  const {setCheckOut}=useContext(CheckOutContext);
+
   const handleCheckOut=()=>{
     console.log("Check out");
     fetch(`http://localhost:15555/api/main/cart/checkOutCart`, {
@@ -40,7 +45,10 @@ function Cart({ cart }: any) {
       .then((data) => {
         if(!data.error){
           console.log(data);
+          setCheckOut(userDetails?.carts);
           setUserDetails(data);
+          navigate("/checkout")
+
         }
         else{
           console.log("transaction failed");
@@ -121,4 +129,4 @@ function Cart({ cart }: any) {
   );
 }
 
-export default Cart;
+export default MyCart;
