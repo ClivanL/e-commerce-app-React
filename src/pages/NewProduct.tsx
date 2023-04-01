@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import Button from '../components/Button';
 import Navbar from '../components/Navbar';
+import NavbarNoLogin from '../components/NavbarNoLogin';
 import useRetrieveDetails from '../hooks/useRetrieveDetails';
 
 
@@ -38,6 +40,7 @@ async function handleSubmit(e:any){
 
 
     return (<>
+    {(userDetails?.userId)?<div>
     <Navbar/>
     {/* <h3><b>insert product</b></h3>
     <form onSubmit={handleSubmit}>
@@ -122,6 +125,12 @@ async function handleSubmit(e:any){
     </div>
   </div>
 </div>
+</div>:
+<div>
+<NavbarNoLogin/>
+<h1>You are not logged in. Please log in. </h1>
+<Button label="Go to login page" dest="login"/>
+</div>}
     </>)
 }
 

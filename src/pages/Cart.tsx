@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Button from "../components/Button";
 import Navbar from "../components/Navbar";
+import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 interface Item {
@@ -86,7 +88,7 @@ function Cart({ cart }: any) {
   }
   return (
     <>
-      <Navbar />
+      {(userDetails?.userId)?<div><Navbar />
       <h1>My cart</h1>
       <table>
         <tbody>
@@ -109,6 +111,12 @@ function Cart({ cart }: any) {
         </tbody>
       </table>
           <button onClick={handleCheckOut}>Check out</button>
+          </div>:
+          <div>
+            <NavbarNoLogin/>
+<h1>You are not logged in. Please log in. </h1>
+<Button label="Go to login page" dest="login"/>
+            </div>}
     </>
   );
 }
