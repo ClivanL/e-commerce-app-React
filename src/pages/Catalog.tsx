@@ -38,7 +38,7 @@ function Catalog({addToCart}:any){
     const {login}=useContext(LoginContext)
     const {choice} = useParams();
     return <>
-    {(login)?<Navbar/>:<NavbarNoLogin/>}
+    {(userDetails?.userId||login)?<Navbar/>:<NavbarNoLogin/>}
     <h1 className="text-red-800">List of products</h1>
     <h2>Choice of category: {choice}</h2>
     {products?.filter((item:productTypes)=>{
