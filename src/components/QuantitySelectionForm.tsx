@@ -15,9 +15,13 @@ export default function QuantitySelectionForm({setSelection, itemId, userId}:any
           })
             .then((response) => response.json())
             .then((data) => {
-                if (data){
+                if (!data.error){
+                    console.log(data);
                     alert("item has been added to cart successfully")
                     setSelection(0);
+                }
+                else{
+                    alert("Add to cart failed, you are not logged in!")
                 }
 
             });
