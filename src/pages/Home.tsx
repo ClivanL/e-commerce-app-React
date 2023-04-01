@@ -3,11 +3,13 @@ import Button from "../components/Button"
 import NavbarNoLogin from "../components/NavbarNoLogin"
 import {useContext} from 'react'
 import {LoginContext} from "../App"
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 function Home(){
     const {login}=useContext(LoginContext)
+    const {userDetails}= useRetrieveDetails();
     return(<>
-    {(login)?
+    {(userDetails?.userId||login)?
     <div>
     <Navbar/>
     This is the start of the app. 

@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 const LogoutButton = (props: any) => {
   const navigate = useNavigate();
-  const moveToPage = (dest: String) => {
-    navigate(`/${dest}`);
+  const moveToPage = () => {
+    navigate(`/logout`);
   };
   return (
     <button
@@ -16,7 +16,8 @@ const LogoutButton = (props: any) => {
             "Content-Type": "application/json",
           },
         });
-        moveToPage(props.dest);
+        props.setLogin(false);
+        moveToPage();
       }}
       className="bg-gray-600 text-black font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-gray-400 
       duration-500"

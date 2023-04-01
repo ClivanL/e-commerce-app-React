@@ -10,6 +10,7 @@ import Category from './pages/Category';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import SignUp from './pages/SignUp';
+import Logout from './pages/Logout';
 
 interface productTypes {
   name:string,
@@ -53,6 +54,7 @@ function App(){
       <SessionContext.Provider value={{sessionToken,setSessionToken}}>
       <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/logout" element={<Logout/>}/>
       <Route path="/category" element={<Category categories={categories}/>}/>
       <Route path="/category/:choice" element={<Catalog addToCart={addToCart}/>}/>
       <Route path="/category/:choice/:productid" element={<Product addToCart={addToCart}/>}/>

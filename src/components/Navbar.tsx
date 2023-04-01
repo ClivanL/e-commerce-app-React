@@ -38,7 +38,7 @@ function Navbar(){
         <li>
         <Button label="List new product" dest="newproduct"/>
         <Button label="View Cart" dest="mycart"/>
-        <LogoutButton label="Logout" dest="" setLogin={setLogin}/>
+        <LogoutButton label="Logout" setLogin={setLogin}/>
         </li>
       </ul>
       </div>

@@ -42,6 +42,7 @@ function Cart({ cart }: any) {
         }
         else{
           console.log("transaction failed");
+          alert("Transaction failed, insufficient quantity");
         }
 
       })
