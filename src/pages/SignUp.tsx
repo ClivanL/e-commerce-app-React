@@ -4,8 +4,40 @@ import {useNavigate} from 'react-router-dom'
 
 function SignUp({addNewAccount}:any){
 
-    const [register,setRegister]=useState({"fullname":"","username":"","email":"", "password":"", "confirmpassword":""});
+    const [register,setRegister]=useState({"name":"","username":"","email":"", "password":"", "confirmpassword":""});
     const navigate=useNavigate();
+    const handleSubmit=(e:any)=>{
+        e.preventDefault();
+        var resp:any;
+        console.log("handleLogin");
+        console.log(register);
+        fetch(`http://localhost:15555/api/main/newAccount`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        username:register.username,
+        name:register.name,
+        email:register.email,
+        password:register.password
+      })
+    })
+      .then((response) => {
+        resp=response;
+        return response.json()
+    })
+      .then((data) => {
+        if (resp.status===201){
+            alert(data.message);
+            navigate("/");
+        }
+        else{
+            alert(data.message);
+        }
+      });
+    }
 
     return <>
     <Navbar/>
@@ -24,8 +56,8 @@ function SignUp({addNewAccount}:any){
                     <input 
                         type="text"
                         className="block border border-grey-light w-full p-3 rounded mb-4"
-                        value={register.fullname}
-                        onChange={(e)=>setRegister({...register,"fullname":e.target.value})}
+                        value={register.name}
+                        onChange={(e)=>setRegister({...register,"name":e.target.value})}
                         name="fullname"
                         placeholder="Full Name" required/>
 
@@ -66,13 +98,7 @@ function SignUp({addNewAccount}:any){
                         :
                         <div>
                         <p></p>
-                        <button type="submit" onClick={()=>addNewAccount(
-                              {"id":0,
-                              "name":register.fullname,
-                              "username":register.username,
-                              "password":register.password,
-                              "productsId":[]}
-                        )} className="w-full text-center py-3 rounded bg-indigo-600 text-white hover:bg-indigo-400 focus:outline-none my-1">Create Account</button>
+                        <button type="submit" onClick={handleSubmit} className="w-full text-center py-3 rounded bg-indigo-600 text-white hover:bg-indigo-400 focus:outline-none my-1">Create Account</button>
                         </div>}
                     
 
