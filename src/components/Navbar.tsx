@@ -40,6 +40,7 @@ function Navbar(){
         <Button label="View Cart" dest="mycart"/>
         <Button label="My purchase history" dest="purchasehistory"/>
         <Button label="My sale history" dest="salehistory"/>
+        <Button label="My listed items" dest="listeditems"/>
         <LogoutButton label="Logout" setLogin={setLogin}/>
         </li>
       </ul>

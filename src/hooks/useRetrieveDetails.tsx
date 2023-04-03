@@ -25,6 +25,7 @@ interface UserDetails {
   carts: Cart[];
   name: String;
   username: String;
+  listedItems:Item[];
 }
 
 export default function useRetrieveDetails() {

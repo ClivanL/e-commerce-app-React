@@ -14,6 +14,7 @@ import Logout from './pages/Logout';
 import CheckOutSuccessful from './pages/CheckOutSuccessful';
 import PurchaseHistory from './pages/PurchaseHistory';
 import SaleHistory from './pages/SaleHistory';
+import ListedItem from './pages/ListedItem';
 
 interface productTypes {
   name:string,
@@ -88,6 +89,7 @@ function App(){
       <Route path="/signup" element={<SignUp addNewAccount={addNewAccount}/>} />
       <Route path="/purchasehistory" element={<PurchaseHistory/>}/>
       <Route path="/salehistory" element={<SaleHistory/>}/>
+      <Route path="/listeditems" element={<ListedItem/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>
