@@ -10,7 +10,7 @@ const QuantityAmendForm = (props: any) => {
           id="quantity"
           type="number"
           value={props.quantity}
-          onChange={(e) => props.setQuantity(e.target.value)}
+          onChange={(e) => props.setQuantity(parseInt(e.target.value))}
         />
       </form>
     </>
@@ -32,8 +32,43 @@ export default function ListedItem() {
   const handleConfirm = (id: number) => {
     console.log(`confirm alr la, i am changing item ${id} to a quantity of ${quantity}`);
     //send quantity and id down to backend, amend quantity based on id, and then refetch the entire main up to update userDetails.
-    setClick(false);
-    setSelection(0);
+    var resp:any;
+
+    fetch(`http://localhost:15555/api/main/owner/updateQuantity`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "id": id,
+        "quantity":quantity,
+      }),
+    })
+      .then((response) => {
+        resp=response;
+        return response.json()})
+      .then((data) => {
+        console.log(resp.status);
+        if (resp.status===202){
+          setClick(false);
+          setSelection(0);
+          // setUserDetails to update userDetails which will change the re-render.
+          setUserDetails({...userDetails!,listedItems:[...userDetails!.listedItems.map((item)=>{
+            if (item.id===id){
+              return {...item, quantity:quantity}
+            }
+              else{
+                return {...item}
+              }
+            
+          })]})
+        }
+        else{
+          alert(data.message);
+        }
+      })
+
   };
   return (
     <>
@@ -52,7 +87,7 @@ export default function ListedItem() {
           </tr>
           {userDetails?.listedItems?.map((element) => {
             return (
-              <tr>
+              <tr key={element.id}>
                 <td>{element.itemName}</td>
                 <td>{element.price}</td>
                 <td>{element.description}</td>
