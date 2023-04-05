@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
   
 export default function useRetrievePurchaseHistory() {
     const [purchaseHistory, setPurchaseHistory] = useState<Cart[]>();
+    var resp:any;
     useEffect(() => {
       fetch(`http://localhost:15555/api/main/retrieveTransactionHistory`, {
         method: "GET",
@@ -30,9 +31,13 @@ export default function useRetrievePurchaseHistory() {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          resp=response;
+          return response.json()})
         .then((data) => {
-          setPurchaseHistory(data);
+          if (resp.status===200){
+            setPurchaseHistory(data);
+          }
         });
     }, []);
     return purchaseHistory;

@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import useRetrievePurchaseHistory from "../hooks/useRetrievePurchaseHistory";
+import UserNotLoggedIn from "./UserNotLoggedIn";
 
 interface Item {
   id: number;
@@ -24,7 +25,7 @@ export default function PurchaseHistory() {
   const purchaseHistory = useRetrievePurchaseHistory()!;
 
   return (
-    <>
+    <>{purchaseHistory?<div>
       <Navbar />
       Purchase History shown here
       <table>
@@ -45,6 +46,7 @@ export default function PurchaseHistory() {
           })}
         </tbody>
       </table>
+      </div>:<UserNotLoggedIn/>}
     </>
   );
 }

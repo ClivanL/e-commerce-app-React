@@ -22,6 +22,7 @@ interface Item {
 
 export default function useRetrieveSaleHistory(){
     const [saleHistory, setSaleHistory] = useState<Cart[]>();
+    var resp:any;
     useEffect(() => {
       fetch(`http://localhost:15555/api/main/retrieveSaleHistory`, {
         method: "GET",
@@ -30,9 +31,14 @@ export default function useRetrieveSaleHistory(){
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+          resp=response;
+          return response.json()})
         .then((data) => {
-          setSaleHistory(data);
+          console.log(resp.status)
+          if (resp.status===200){
+            setSaleHistory(data);
+          }
         });
     }, []);
     return saleHistory;

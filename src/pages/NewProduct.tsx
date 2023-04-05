@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import NavbarNoLogin from '../components/NavbarNoLogin';
 import useRetrieveDetails from '../hooks/useRetrieveDetails';
+import UserNotLoggedIn from './UserNotLoggedIn';
 
 
 function NewProduct({categories}:any){
@@ -126,11 +127,8 @@ async function handleSubmit(e:any){
   </div>
 </div>
 </div>:
-<div>
-<NavbarNoLogin/>
-<h1>You are not logged in. Please log in. </h1>
-<Button label="Go to login page" dest="login"/>
-</div>}
+<UserNotLoggedIn/>
+}
     </>)
 }
 

@@ -5,6 +5,7 @@ import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import { CheckOutContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import UserNotLoggedIn from "./UserNotLoggedIn";
 
 interface Item {
   id: number;
@@ -137,11 +138,7 @@ function MyCart({ cart }: any) {
           <button onClick={handleCheckOut}>Check out</button>
         </div>
       ) : (
-        <div>
-          <NavbarNoLogin />
-          <h1>You are not logged in. Please log in. </h1>
-          <Button label="Go to login page" dest="login" />
-        </div>
+    <UserNotLoggedIn/>
       )}
     </>
   );

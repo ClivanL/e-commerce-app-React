@@ -1,10 +1,11 @@
 import Navbar from "../components/Navbar";
 import useRetrieveSaleHistory from "../hooks/useRetrieveSaleHistory";
+import UserNotLoggedIn from "./UserNotLoggedIn";
 
 export default function SaleHistory(){
     const saleHistory=useRetrieveSaleHistory();
     return <>
-    <Navbar/>
+    {saleHistory?<div><Navbar/>
     Sale history shown here
     <table>
         <tbody>
@@ -23,6 +24,6 @@ export default function SaleHistory(){
             </tr>;
           })}
         </tbody>
-      </table>
+      </table></div>:<UserNotLoggedIn/>}
     </>
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
+import UserNotLoggedIn from "./UserNotLoggedIn";
 
 const QuantityAmendForm = (props: any) => {
   return (
@@ -72,7 +73,7 @@ export default function ListedItem() {
   };
   return (
     <>
-      <Navbar />
+      {userDetails?.userId?<div><Navbar />
       Listed Items here
       {click===true?<p>New quantity must be more than {currentQuantity}</p>:""}
       <table>
@@ -114,7 +115,7 @@ export default function ListedItem() {
             );
           })}
         </tbody>
-      </table>
+      </table></div>:<UserNotLoggedIn/>}
     </>
   );
 }
