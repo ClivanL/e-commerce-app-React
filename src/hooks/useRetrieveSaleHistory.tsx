@@ -11,18 +11,19 @@ interface Item {
     quantity: number;
   }
   
-  interface PurchaseLog {
+  interface SaleLog {
     id:number;
     userId:number;
     itemId:number;
     quantity:number;
     item:Item;
     createdAt:Date;
+    userUsername:String;
   }
 
 
 export default function useRetrieveSaleHistory(){
-    const [saleHistory, setSaleHistory] = useState<PurchaseLog[]>();
+    const [saleHistory, setSaleHistory] = useState<SaleLog[]>();
     var resp:any;
     useEffect(() => {
       fetch(`http://localhost:15555/api/main/retrieveSaleHistory`, {

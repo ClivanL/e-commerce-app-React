@@ -21,6 +21,7 @@ interface PurchaseLog {
   quantity: number;
   item: Item;
   createdAt:Date;
+  ownerUsername:String;
 }
 
 export default function PurchaseHistory() {
@@ -37,6 +38,7 @@ export default function PurchaseHistory() {
             <th>Price</th>
             <th>Quantity</th>
             <th>Purchased Date & Time</th>
+            <th>Purchased From:</th>
           </tr>
           {purchaseHistory?.map((element: PurchaseLog) => {
             return <tr key={element.item.quantity}>
@@ -44,6 +46,7 @@ export default function PurchaseHistory() {
               <td>{element.item.price}</td>
               <td>{element.quantity}</td>
               <td>{convertDateToString(element.createdAt)}</td>
+              <td>{element.ownerUsername}</td>
             </tr>;
           })}
         </tbody>

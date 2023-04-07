@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
     quantity:number;
     item:Item;
     createdAt:Date;
+    ownerUsername:String;
   }
 
   
