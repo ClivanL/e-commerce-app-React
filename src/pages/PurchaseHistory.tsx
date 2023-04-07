@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import useRetrievePurchaseHistory from "../hooks/useRetrievePurchaseHistory";
 import UserNotLoggedIn from "./UserNotLoggedIn";
+import convertDateToString from "../functions/convertDateToString";
 
 interface Item {
   id: number;
@@ -13,12 +14,13 @@ interface Item {
   quantity: number;
 }
 
-interface Cart {
+interface PurchaseLog {
   id: number;
   userId: number;
   itemId: number;
   quantity: number;
   item: Item;
+  createdAt:Date;
 }
 
 export default function PurchaseHistory() {
@@ -34,14 +36,14 @@ export default function PurchaseHistory() {
             <th>Item Name</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Purchased Date</th>
+            <th>Purchased Date & Time</th>
           </tr>
-          {purchaseHistory?.map((element: Cart) => {
+          {purchaseHistory?.map((element: PurchaseLog) => {
             return <tr key={element.item.quantity}>
               <td>{element.item.itemName}</td>
               <td>{element.item.price}</td>
               <td>{element.quantity}</td>
-              <td>To be added</td>
+              <td>{convertDateToString(element.createdAt)}</td>
             </tr>;
           })}
         </tbody>

@@ -11,17 +11,18 @@ import { useEffect, useState } from "react";
     quantity: number;
   }
   
-  interface Cart {
+  interface PurchaseLog {
     id:number;
     userId:number;
     itemId:number;
     quantity:number;
-    item:Item
+    item:Item;
+    createdAt:Date;
   }
 
   
 export default function useRetrievePurchaseHistory() {
-    const [purchaseHistory, setPurchaseHistory] = useState<Cart[]>();
+    const [purchaseHistory, setPurchaseHistory] = useState<PurchaseLog[]>();
     var resp:any;
     useEffect(() => {
       fetch(`http://localhost:15555/api/main/retrieveTransactionHistory`, {
