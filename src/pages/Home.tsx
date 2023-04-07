@@ -4,6 +4,7 @@ import NavbarNoLogin from "../components/NavbarNoLogin"
 import {useContext} from 'react'
 import {LoginContext} from "../App"
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
+import Searchbar from "../components/Searchbar"
 
 function Home(){
     const {login}=useContext(LoginContext)
@@ -12,18 +13,23 @@ function Home(){
     {(userDetails?.userId||login)?
     <div>
     <Navbar/>
+    <Searchbar/>
     This is the start of the app. 
     <h1 className="text-4xl font-bold underline">
-    Hello user!
+    Hello {userDetails?.username}!
     </h1>
     <br></br>
     Click the buttons to begin buying or selling:
+    <div>
     <Button label="BUY" dest="category"/>
     <Button label="SELL" dest="newproduct"/>
+    </div>
+
     </div>
     :
     <div>
     <NavbarNoLogin/>
+    <Searchbar/>
     <div className="y-auto">
     <p>Please login to view page</p>
     <Button label="Go to login page" dest="login"/>

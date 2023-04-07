@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import {useState} from 'react'
 import {IonIcon} from "react-ion-icon"
+import Searchbar from "./Searchbar";
 
 function NavbarNoLogin(){
     let [open,setOpen]=useState(false);

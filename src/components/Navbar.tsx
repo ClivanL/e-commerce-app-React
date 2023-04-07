@@ -4,6 +4,7 @@ import {useState, useContext} from 'react'
 import {IonIcon} from "react-ion-icon"
 import { LoginContext } from "../App";
 import LogoutButton from "./LogoutButton";
+import Searchbar from "./Searchbar";
 
 function Navbar(){
     let [open,setOpen]=useState(false);
