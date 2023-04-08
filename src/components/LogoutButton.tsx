@@ -19,7 +19,7 @@ const LogoutButton = (props: any) => {
         props.setLogin(false);
         moveToPage();
       }}
-      className="bg-gray-600 text-black font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-gray-400 
+      className="bg-gray-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-gray-400 
       duration-500"
     >
       {props.label}

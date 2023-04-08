@@ -12,10 +12,9 @@ const {userDetails}=useRetrieveDetails();
     {(userDetails?.userId||login)?<Navbar/>:<NavbarNoLogin/>}
     <h1>Categories list here-cards</h1>
     <div>
+        <CategoryCard key="All Products" cat="All Products"/>
     {categories.map((item:any)=>
-    <div key={item} >
-        <CategoryCard cat={item}/>
-    </div>
+        <CategoryCard key={item} cat={item}/> 
     )}
     </div>
     </>

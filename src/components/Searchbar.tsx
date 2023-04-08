@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 interface productTypes {
     id:number;
@@ -13,6 +14,7 @@ interface productTypes {
 export default function Searchbar(){
     const [search, setSearch]=useState("");
     const [results,setResults]=useState<productTypes[]>();
+    const navigate=useNavigate();
     const handleSearch=()=>{
         var resp:any;
         fetch(`http://localhost:15555/api/main/search/${search}`, {
@@ -40,7 +42,7 @@ export default function Searchbar(){
         results?
     <ul>
         {results?.map((item:productTypes)=>{
-            return <li key={item.id}>{item.itemName}</li>
+            return <li onClick={()=>navigate(`/category/${item.category}/${item.id}`)} key={item.id}>{item.itemName}</li>
         })}
     </ul>:""}
     </div>

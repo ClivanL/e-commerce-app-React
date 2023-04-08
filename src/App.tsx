@@ -70,7 +70,7 @@ function App(){
     setUserAccounts([...userAccounts, newAccount]);
   }
 
-  const categories=["All products","Snacks", "Candies", "Toys"]
+  const categories=["Snacks", "Candies", "Toys", "Electronics", "Shoes"]
 
   return (
     <div>

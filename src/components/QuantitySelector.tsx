@@ -1,5 +1,8 @@
-export default function QuantitySelectionForm({setSelection, itemId, userId}:any){
-    const handleSubmit=(event:any)=>{
+import { useState } from "react";
+
+export default function QuantitySelector({itemId,setClick,userId}:any){
+    const [quantity,setQuantity]=useState(0);
+    const handleConfirm=(event:any)=>{
         event.preventDefault();
         fetch(`http://localhost:15555/api/main/cart/addToCart`, {
             method: "POST",
@@ -10,7 +13,7 @@ export default function QuantitySelectionForm({setSelection, itemId, userId}:any
             body: JSON.stringify({
                 userId: userId,
                 itemId: itemId,
-                quantity: event.target.quantity.value
+                quantity: quantity
               })
           })
             .then((response) => response.json())
@@ -18,21 +21,16 @@ export default function QuantitySelectionForm({setSelection, itemId, userId}:any
                 if (!data.error){
                     console.log(data);
                     alert("item has been added to cart successfully")
-                    setSelection(0);
-                }
-                else{
-                    alert("Add to cart failed, you are not logged in!")
+                    setClick(false);
                 }
 
             });
-        
     }
-
     return <>
-    <form onSubmit={handleSubmit}>
-        <input type="number" id="quantity" name="quantity"></input>
+    <form>
+        <input type="number" id="quantity" name="quantity" value={quantity} onChange={(e)=>setQuantity(parseInt(e.target.value))}/>
         <button className='bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
-      duration-500'>Confirm</button>
+      duration-500' onClick={handleConfirm}>Confirm Quantity</button>
     </form>
     </>
 }

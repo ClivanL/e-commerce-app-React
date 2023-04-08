@@ -20,7 +20,7 @@ function Navbar(){
       <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800'>
         <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-        <IonIcon name="logo-ionic"></IonIcon>
+        <IonIcon name="cart-sharp"></IonIcon>
         </span>
         Snicker World
       </div>
