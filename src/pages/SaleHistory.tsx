@@ -19,6 +19,7 @@ export default function SaleHistory(){
             <th>Quantity</th>
             <th>Sale Date & Time</th>
             <th>Purchased by:</th>
+            <th>Item sent out?</th>
           </tr>
           {saleHistory?.map((element) => {
             return <tr key={element.item.quantity}>
@@ -27,6 +28,7 @@ export default function SaleHistory(){
               <td>{element.quantity}</td>
               <td>{convertDateToString(element.createdAt)}</td>
               <td>{element.userUsername}</td>
+              <td><button>Confirm (WIP)</button></td>
             </tr>;
           })}
         </tbody>

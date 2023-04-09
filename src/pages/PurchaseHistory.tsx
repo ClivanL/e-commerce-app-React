@@ -4,6 +4,7 @@ import UserNotLoggedIn from "./UserNotLoggedIn";
 import convertDateToString from "../functions/convertDateToString";
 import { useContext } from "react";
 import { LoginContext } from "../App";
+import { IonIcon } from "react-ion-icon";
 
 interface Item {
   id: number;
@@ -42,6 +43,9 @@ export default function PurchaseHistory() {
             <th>Quantity</th>
             <th>Purchased Date & Time</th>
             <th>Purchased From:</th>
+            <th>Item sent out</th>
+            <th>Item Received?</th>
+            <th>Review</th>
           </tr>
           {purchaseHistory?.map((element: PurchaseLog) => {
             return <tr key={element.item.quantity}>
@@ -50,6 +54,9 @@ export default function PurchaseHistory() {
               <td>{element.quantity}</td>
               <td>{convertDateToString(element.createdAt)}</td>
               <td>{element.ownerUsername}</td>
+              <td>Yes/No (WIP)</td>
+              <td><button className="bg-green-400 rounded text-sm border-black border text-sm w-16 h-6 font-bold">Confirm</button>(WIP)</td>
+              <td><IonIcon name="pencil-sharp"/>(WIP)</td>
             </tr>;
           })}
         </tbody>
