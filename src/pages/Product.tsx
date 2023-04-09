@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import QuantitySelector from "../components/QuantitySelector";
+import { LoginContext } from "../App";
+import NavbarNoLogin from "../components/NavbarNoLogin";
 
 interface productTypes {
   id: number;
@@ -19,6 +21,7 @@ function Product({ addToCart }: any) {
   const [product, setProduct] = useState<productTypes>();
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
+  const login=useContext(LoginContext);
   useEffect(() => {
     fetch(`http://localhost:15555/api/main/item/id/${productid}`, {
       method: "GET",
@@ -35,7 +38,7 @@ function Product({ addToCart }: any) {
   const { productid } = useParams();
   return (
     <>
-      <Navbar />
+      {login||userDetails?.userId?<Navbar />:<NavbarNoLogin/>}
       {
         <div key={product?.id}>
           <ul>

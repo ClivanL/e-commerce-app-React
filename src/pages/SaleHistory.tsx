@@ -2,11 +2,14 @@ import Navbar from "../components/Navbar";
 import useRetrieveSaleHistory from "../hooks/useRetrieveSaleHistory";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import convertDateToString from "../functions/convertDateToString";
+import { useContext } from "react";
+import { LoginContext } from "../App";
 
 export default function SaleHistory(){
     const saleHistory=useRetrieveSaleHistory();
+    const login=useContext(LoginContext);
     return <>
-    {saleHistory?<div><Navbar/>
+    {login||saleHistory?<div><Navbar/>
     Sale history shown here
     <table>
         <tbody>

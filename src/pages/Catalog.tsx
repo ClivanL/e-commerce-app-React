@@ -45,11 +45,9 @@ function Catalog({ addToCart }: any) {
       {userDetails?.userId || login ? <Navbar /> : <NavbarNoLogin />}
       <h1 className="text-red-800">List of products</h1>
       <h2>Choice of category: {choice}</h2>
+      <div className="flex">
       {products
-        ?.filter((item: productTypes) => {
-          return choice !== "All Products" ? item.category === choice : true;
-        })
-        .map((item: productTypes) => {
+        ?.map((item: productTypes) => {
           return (
             <div key={item.itemName}>
               <ListCard
@@ -62,6 +60,7 @@ function Catalog({ addToCart }: any) {
             </div>
           );
         })}
+        </div>
     </>
   );
 }

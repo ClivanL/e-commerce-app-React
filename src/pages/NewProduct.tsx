@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import { LoginContext } from '../App';
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
 import NavbarNoLogin from '../components/NavbarNoLogin';
@@ -11,7 +12,7 @@ function NewProduct({categories}:any){
 
 const navigate=useNavigate();
 const {userDetails}=useRetrieveDetails();
-
+const login=useContext(LoginContext);
 let [product,setProduct]=useState({
     itemName:"",
     price:0,
@@ -41,7 +42,7 @@ async function handleSubmit(e:any){
 
 
     return (<>
-    {(userDetails?.userId)?<div>
+    {(login||userDetails?.userId)?<div>
     <Navbar/>
     {/* <h3><b>insert product</b></h3>
     <form onSubmit={handleSubmit}>

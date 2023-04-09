@@ -10,10 +10,9 @@ function Home(){
     const {login}=useContext(LoginContext)
     const {userDetails}= useRetrieveDetails();
     return(<>
-    {(userDetails?.userId||login)?
+    {(login||userDetails?.userId)?
     <div>
     <Navbar/>
-    <Searchbar/>
     This is the start of the app. 
     <h1 className="text-4xl font-bold underline">
     Hello {userDetails?.username}!
@@ -29,7 +28,6 @@ function Home(){
     :
     <div>
     <NavbarNoLogin/>
-    <Searchbar/>
     <div className="y-auto">
     <p>Please login to view page</p>
     <Button label="Go to login page" dest="login"/>

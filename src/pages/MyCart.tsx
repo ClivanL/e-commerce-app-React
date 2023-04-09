@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
-import { CheckOutContext } from "../App";
+import { CheckOutContext, LoginContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 
@@ -31,6 +31,7 @@ function MyCart({ cart }: any) {
   // const [cartDetails, setCartDetails]=useState((userDetails)?[...userDetails?.carts]:[]);
   const navigate = useNavigate();
   const { setCheckOut } = useContext(CheckOutContext);
+  const login =useContext(LoginContext);
 
   const handleCheckOut = () => {
     console.log("Check out");
@@ -91,7 +92,7 @@ function MyCart({ cart }: any) {
   };
   return (
     <>
-      {userDetails?.userId ? (
+      {login||userDetails?.userId ? (
         <div>
           <Navbar />
           <h1>My cart</h1>

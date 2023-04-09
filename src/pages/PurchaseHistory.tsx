@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import useRetrievePurchaseHistory from "../hooks/useRetrievePurchaseHistory";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import convertDateToString from "../functions/convertDateToString";
+import { useContext } from "react";
+import { LoginContext } from "../App";
 
 interface Item {
   id: number;
@@ -26,9 +28,10 @@ interface PurchaseLog {
 
 export default function PurchaseHistory() {
   const purchaseHistory = useRetrievePurchaseHistory()!;
+  const login=useContext(LoginContext);
 
   return (
-    <>{purchaseHistory?<div>
+    <>{login||purchaseHistory?<div>
       <Navbar />
       Purchase History shown here
       <table>

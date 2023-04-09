@@ -11,34 +11,31 @@ function NavbarNoLogin(){
         navigate(`/${dest}`)
     }
     return (<>
-    {/* navigation bar here. */}
-    <div className='shadow-md w-full fixed top-0 left-0'>
-      <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
-      <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-800'>
-        <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-        <IonIcon name="logo-ionic"></IonIcon>
-        </span>
-        Snicker World
-      </div>
-      
-      <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
-      <IonIcon name={open ? 'close':'menu'}></IonIcon>
-      </div>
-
-      <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
-            <li key="Testing1" className='md:ml-8 text-xl md:my-0 my-7'>
-              <div onClick={()=>moveToPage("")} className='text-gray-800 hover:text-gray-400 duration-500'>Home</div>
-            </li>
-            <li key="Testing2" className='md:ml-8 text-xl md:my-0 my-7'>
-            <div onClick={()=>moveToPage("category")} className='text-gray-800 hover:text-gray-400 duration-500'>Product Catalog</div>
-            </li>
-        <li>
-        <Button label="Login/Register" dest="login"/>
-        </li>
-      </ul>
-      </div>
+    <div className="flex shadow-md bg-black w-full fixed top-0 left-0">
+    <div className="flex px-2 font-bold text-white text-xl py-2 font-[poppins]">
+    <span onClick={()=>moveToPage("")} className="text-2xl text-red-500"><IonIcon name="pizza"/></span>
+    <span onClick={()=>moveToPage("")} className="px-0.5">Snicker World</span>
     </div>
+    <div className="flex top-2 right-8 absolute text-white">
+      <Searchbar/>
+      <span onClick={()=>moveToPage("")} className="px-3 hover:text-green-300">
+        Home
+      </span>
+      <span onClick={()=>moveToPage("category")} className="px-3 hover:text-green-300">
+        Product Catalog
+      </span>
+      <div>
+    <span onClick={()=>setOpen(!open)} className={`text-2xl ${!open?"relative hover:text-green-300":"text-green-300"}`}>
+    <IonIcon name="person-add-outline"/>
+    </span>
+    {open?
+    <ul className="absolute right-0 w-36 bg-black overflow-scroll">
+    <li onClick={()=>moveToPage("login")} className="hover:text-green-300">Login/Register</li>
+    </ul>
+    :""}
+    </div>
+    </div>
+  </div>
     {/* <nav>
     <Button dest="" label="Home"/>
     <Button dest="catalog" label="Product Catalog"/>

@@ -34,17 +34,18 @@ export default function Searchbar(){
        })
     }
     return <>
-    <div>
+    <div className="px-8">
     <form onKeyUp={handleSearch}>
-        <input id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <input className="text-black rounded w-64" id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
     </form>
     {
         results?
-    <ul>
+    <ul className="bg-black rounded">
         {results?.map((item:productTypes)=>{
-            return <li onClick={()=>navigate(`/category/${item.category}/${item.id}`)} key={item.id}>{item.itemName}</li>
+            return <li className="hover:text-black hover:bg-green-600" onClick={()=>navigate(`/category/${item.category}/${item.id}`)} key={item.id}>{item.itemName}</li>
         })}
     </ul>:""}
     </div>
+
     </>
 }

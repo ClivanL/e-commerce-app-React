@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LoginContext } from "../App";
 import Navbar from "../components/Navbar";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import UserNotLoggedIn from "./UserNotLoggedIn";
@@ -24,6 +25,7 @@ export default function ListedItem() {
   const [click, setClick] = useState(false);
   const [quantity, setQuantity]=useState(0);
   const [currentQuantity,setCurrentQuantity]=useState(0)
+  const login = useContext(LoginContext);
   const handleAmend = (id: number, quantity:number) => {
     setSelection(id);
     setClick(true);
@@ -73,7 +75,7 @@ export default function ListedItem() {
   };
   return (
     <>
-      {userDetails?.userId?<div><Navbar />
+      {login||userDetails?.userId?<div><Navbar />
       Listed Items here
       {click===true?<p>New quantity must be more than {currentQuantity}</p>:""}
       <table>

@@ -30,7 +30,7 @@ export default function QuantitySelectionForm({setSelection, itemId, userId}:any
 
     return <>
     <form onSubmit={handleSubmit}>
-        <input type="number" id="quantity" name="quantity"></input>
+        <input className="border border-indigo-500 rounded mb-1" type="number" id="quantity" name="quantity"></input>
         <button className='bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
       duration-500'>Confirm</button>
     </form>
