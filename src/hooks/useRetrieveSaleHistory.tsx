@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactComponentElement, ReactElement, useEffect, useState } from "react";
 
 interface Item {
     id: number;
@@ -19,10 +19,11 @@ interface Item {
     item:Item;
     createdAt:Date;
     userUsername:String;
+    sent:Boolean;
   }
 
 
-export default function useRetrieveSaleHistory(){
+export default function useRetrieveSaleHistory(update:Boolean){
     const [saleHistory, setSaleHistory] = useState<SaleLog[]>();
     var resp:any;
     useEffect(() => {
@@ -39,9 +40,10 @@ export default function useRetrieveSaleHistory(){
         .then((data) => {
           console.log(resp.status)
           if (resp.status===200){
+            console.log(data);
             setSaleHistory(data);
           }
         });
-    }, []);
-    return saleHistory;
+    }, [update]);
+    return {saleHistory, setSaleHistory};
 }

@@ -19,10 +19,12 @@ import { useEffect, useState } from "react";
     item:Item;
     createdAt:Date;
     ownerUsername:String;
+    sent:Boolean;
+    received:Boolean;
   }
 
   
-export default function useRetrievePurchaseHistory() {
+export default function useRetrievePurchaseHistory(update:Boolean) {
     const [purchaseHistory, setPurchaseHistory] = useState<PurchaseLog[]>();
     var resp:any;
     useEffect(() => {
@@ -38,10 +40,11 @@ export default function useRetrievePurchaseHistory() {
           return response.json()})
         .then((data) => {
           if (resp.status===200){
+            console.log(data);
             setPurchaseHistory(data);
           }
         });
-    }, []);
-    return purchaseHistory;
+    }, [update]);
+    return {purchaseHistory, setPurchaseHistory};
   }
   
