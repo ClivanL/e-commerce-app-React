@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
   }
 
   
-export default function useRetrievePurchaseHistory(update:Boolean) {
+export default function useRetrievePurchaseHistory(update?:Boolean) {
     const [purchaseHistory, setPurchaseHistory] = useState<PurchaseLog[]>();
     var resp:any;
     useEffect(() => {

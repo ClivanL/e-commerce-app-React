@@ -15,6 +15,7 @@ import CheckOutSuccessful from './pages/CheckOutSuccessful';
 import PurchaseHistory from './pages/PurchaseHistory';
 import SaleHistory from './pages/SaleHistory';
 import ListedItem from './pages/ListedItem';
+import ReviewPurchase from './pages/ReviewPurchase';
 
 interface productTypes {
   name:string,
@@ -90,6 +91,7 @@ function App(){
       <Route path="/purchasehistory" element={<PurchaseHistory/>}/>
       <Route path="/salehistory" element={<SaleHistory/>}/>
       <Route path="/listeditems" element={<ListedItem/>}/>
+      <Route path="/review/new/:purchaseLogId" element={<ReviewPurchase/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>
