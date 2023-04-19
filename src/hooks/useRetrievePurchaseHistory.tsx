@@ -21,6 +21,9 @@ import { useEffect, useState } from "react";
     ownerUsername:String;
     sent:Boolean;
     received:Boolean;
+    reviewedAt:Date;
+    rating:number;
+    comments:String;
   }
 
   

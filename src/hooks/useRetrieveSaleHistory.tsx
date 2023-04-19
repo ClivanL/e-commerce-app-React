@@ -20,6 +20,9 @@ interface Item {
     createdAt:Date;
     userUsername:String;
     sent:Boolean;
+    reviewedAt:Date;
+    rating:number;
+    comments:String;
   }
 
 

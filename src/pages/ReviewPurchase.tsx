@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import { useContext, useState } from "react";
@@ -7,18 +7,41 @@ import UserNotLoggedIn from "./UserNotLoggedIn";
 import useRetrievePurchaseHistory from "../hooks/useRetrievePurchaseHistory";
 
 interface Review {
-    stars:number;
+    rating:number;
     comments:string;
 }
 
 export default function ReviewPurchase() {
   const { purchaseLogId } = useParams();
   const { purchaseHistory } = useRetrievePurchaseHistory();
+  const navigate=useNavigate();
   const login = useContext(LoginContext);
-  const [review, setReview]=useState<Review>({stars:0,comments:""});
+  const [review, setReview]=useState<Review>({rating:0,comments:""});
   const handleClick=(event:any)=>{
     event.preventDefault();
+    var resp:any;
     console.log(review);
+    fetch(`http://localhost:15555/api/main/review/${purchaseLogId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        review
+      ),
+    })
+      .then((response) => {
+        resp=response;
+        return response.json();
+      })
+      .then((data) => {
+        console.log(resp.status);
+        if (resp.status===200){
+          navigate("/purchasehistory")
+        }
+        alert(data.message);
+      })
   }
   return (
     <>
@@ -29,7 +52,7 @@ export default function ReviewPurchase() {
           <p>Quantity purchased:  {purchaseHistory?.filter((item)=>item.id===parseInt(purchaseLogId!))[0].quantity}</p>
           <form>
             <div>
-            <input type="number" placeholder="Choose number of stars" value={review.stars} onChange={(e)=>setReview({...review, stars:parseInt(e.target.value)})}/>
+            <input type="number" placeholder="Choose number of stars" value={review.rating} onChange={(e)=>setReview({...review, rating:parseInt(e.target.value)})}/>
             </div>
             <div>
             <input type="text" placeholder="enter your comments here" value={review.comments} onChange={(e)=>setReview({...review, comments:e.target.value})}/>
