@@ -3,6 +3,7 @@ import { LoginContext } from "../App";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import Navbar from "../components/Navbar";
 import UserNotLoggedIn from "./UserNotLoggedIn";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
   const { login } = useContext(LoginContext);
@@ -11,9 +12,31 @@ export default function ChangePassword() {
     password: "",
     confirmPassword: "",
   });
+  const navigate=useNavigate();
   const handleChangePassword = (event: any) => {
     event.preventDefault();
     console.log(password);
+    var resp:any;
+    fetch(`http://localhost:15555/api/main/changePassword`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "password":password.password
+        }),
+      })
+        .then((response) => {
+            resp=response;
+            return response.json()})
+        .then((data) => {
+            if (resp.status===200){
+                navigate("/profile")
+            }
+            alert(data.message);
+            
+        })
   };
 
   return (
@@ -53,12 +76,12 @@ export default function ChangePassword() {
               <span className="text-red-600">Both passwords do not match!</span>
             )}
             <div>
-              <button
+              {password.password === password.confirmPassword?<button
                 onClick={handleChangePassword}
                 className="bg-red-500 rounded w-auto h-auto hover:bg-red-900"
               >
                 Confirm
-              </button>
+              </button>:<button className="bg-gray-800 rounded w-auto h-auto" disabled>Confirm</button>}
             </div>
           </form>
         </div>
