@@ -46,7 +46,7 @@ function Navbar(){
     </span>
     {open?
     <ul className="absolute right-0 w-36 bg-black overflow-scroll">
-    <li onClick={()=>moveToPage("")} className="hover:text-green-300">My profile</li>
+    <li onClick={()=>moveToPage("profile")} className="hover:text-green-300">My profile</li>
     <li onClick={()=>moveToPage("purchasehistory")} className="hover:text-green-300">My purchase History</li>
     <li onClick={()=>moveToPage("salehistory")} className="hover:text-green-300">My sale history</li>
     <li onClick={()=>moveToPage("listeditems")} className="hover:text-green-300">My listed items</li>

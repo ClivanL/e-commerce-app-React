@@ -16,6 +16,8 @@ import PurchaseHistory from './pages/PurchaseHistory';
 import SaleHistory from './pages/SaleHistory';
 import ListedItem from './pages/ListedItem';
 import ReviewPurchase from './pages/ReviewPurchase';
+import MyProfile from './pages/MyProfile';
+import ChangePassword from './pages/ChangePassword';
 
 interface productTypes {
   name:string,
@@ -82,6 +84,8 @@ function App(){
       <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/logout" element={<Logout/>}/>
+      <Route path="/profile" element={<MyProfile/>}/>
+      <Route path="/changepassword" element={<ChangePassword/>}/>
       <Route path="/category" element={<Category categories={categories}/>}/>
       <Route path="/category/:choice" element={<Catalog addToCart={addToCart}/>}/>
       <Route path="/category/:choice/:productid" element={<Product addToCart={addToCart}/>}/>
