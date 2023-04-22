@@ -24,6 +24,7 @@ interface Cart {
   itemId: number;
   quantity: number;
   item: Item;
+  sufficient: Boolean;
 }
 
 function MyCart({ cart }: any) {
@@ -31,7 +32,7 @@ function MyCart({ cart }: any) {
   // const [cartDetails, setCartDetails]=useState((userDetails)?[...userDetails?.carts]:[]);
   const navigate = useNavigate();
   const { setCheckOut } = useContext(CheckOutContext);
-  const login =useContext(LoginContext);
+  const login = useContext(LoginContext);
 
   const handleCheckOut = () => {
     console.log("Check out");
@@ -61,9 +62,17 @@ function MyCart({ cart }: any) {
     userDetails?.carts?.map((ele) => {
       if (ele.item.id === itemId) {
         if (choice === "-") {
-          newCart.push({ ...ele, quantity: ele.quantity - 1 });
+          newCart.push({
+            ...ele,
+            quantity: ele.quantity - 1,
+            sufficient: ele.item.quantity >= ele.quantity - 1 ? true : false,
+          });
         } else {
-          newCart.push({ ...ele, quantity: ele.quantity + 1 });
+          newCart.push({
+            ...ele,
+            quantity: ele.quantity + 1,
+            sufficient: ele.item.quantity >= ele.quantity + 1 ? true : false,
+          });
         }
       } else {
         newCart.push({ ...ele });
@@ -92,7 +101,7 @@ function MyCart({ cart }: any) {
   };
   return (
     <>
-      {login||userDetails?.userId ? (
+      {login || userDetails?.userId ? (
         <div>
           <Navbar />
           <h1>My cart</h1>
@@ -118,7 +127,13 @@ function MyCart({ cart }: any) {
                     >
                       -
                     </button>
-                    {details.quantity}
+                    <span
+                      className={
+                        details.sufficient ? "text-green-500" : "text-red-600"
+                      }
+                    >
+                      {details.quantity}
+                    </span>
                     <button
                       onClick={() => {
                         handleQuantityChange("+", details.item.id);
@@ -136,10 +151,30 @@ function MyCart({ cart }: any) {
               ))}
             </tbody>
           </table>
-          <button onClick={handleCheckOut}>Check out</button>
+          {userDetails?.fulfillableCart ||
+          userDetails?.carts.filter((ele) => !ele.sufficient).length === 0 ? (
+            <button
+              className="bg-blue-500 w-auto h-auto border-spacing-3 border border-black rounded  hover:bg-blue-900"
+              onClick={handleCheckOut}
+            >
+              Check out
+            </button>
+          ) : (
+            <div>
+              <button
+                className="bg-gray-600 w-auto h-auto border-spacing-3 border border-black rounded"
+                disabled
+              >
+                Check Out
+              </button>
+              <p className="text-red-600 text-xs">
+                Cart cannot be fulfilled, insufficient quantity!
+              </p>
+            </div>
+          )}
         </div>
       ) : (
-    <UserNotLoggedIn/>
+        <UserNotLoggedIn />
       )}
     </>
   );

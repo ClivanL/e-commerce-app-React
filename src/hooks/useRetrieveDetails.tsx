@@ -16,7 +16,8 @@ interface Cart {
   userId:number;
   itemId:number;
   quantity:number;
-  item:Item
+  item:Item;
+  sufficient:Boolean;
 }
 
 interface UserDetails {
@@ -26,6 +27,7 @@ interface UserDetails {
   name: String;
   username: String;
   listedItems:Item[];
+  fulfillableCart:Boolean;
 }
 
 export default function useRetrieveDetails() {
