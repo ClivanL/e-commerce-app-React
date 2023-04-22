@@ -74,7 +74,7 @@ export default function SaleHistory() {
               </tr>
               {saleHistory?.map((element) => {
                 return (
-                  <tr key={element.item.quantity}>
+                  <tr key={element.id}>
                     <td>{element.item.itemName}</td>
                     <td>{element.item.price}</td>
                     <td>{element.quantity}</td>

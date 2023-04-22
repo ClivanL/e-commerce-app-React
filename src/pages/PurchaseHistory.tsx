@@ -85,7 +85,7 @@ export default function PurchaseHistory() {
               </tr>
               {purchaseHistory?.map((element: PurchaseLog) => {
                 return (
-                  <tr key={element.item.quantity}>
+                  <tr key={element.id}>
                     <td>{element.item.itemName}</td>
                     <td>{element.item.price}</td>
                     <td>{element.quantity}</td>

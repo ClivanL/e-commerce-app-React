@@ -62,11 +62,13 @@ function MyCart({ cart }: any) {
     userDetails?.carts?.map((ele) => {
       if (ele.item.id === itemId) {
         if (choice === "-") {
-          newCart.push({
-            ...ele,
-            quantity: ele.quantity - 1,
-            sufficient: ele.item.quantity >= ele.quantity - 1 ? true : false,
-          });
+          if (ele.quantity-1>0){
+            newCart.push({
+              ...ele,
+              quantity: ele.quantity - 1,
+              sufficient: ele.item.quantity >= ele.quantity - 1 ? true : false,
+            });
+          }
         } else {
           newCart.push({
             ...ele,
