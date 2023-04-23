@@ -87,14 +87,16 @@ function Product({ addToCart }: any) {
           ) : (
             ""
           )}
-          <table>
+          <table className="table-auto">
             <header>Review by buyers</header>
+            <thead>
             <tr>
             <th>Date reviewed</th>
             <th>Quantity purchased</th>
             <th>Rating</th>
             <th>Comments</th>
             </tr>
+            </thead>
             {product?.reviews.map((item)=>{
               return <tr>
                 <td>{convertDateToString(item.reviewedAt)}</td>
