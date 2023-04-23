@@ -16,6 +16,7 @@ interface productTypes {
   description: string;
   imageUrl: string;
   ownerId: number;
+  rating:number;
 }
 
 function Catalog({ addToCart }: any) {
@@ -35,6 +36,7 @@ function Catalog({ addToCart }: any) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setProducts(data);
       });
   }, []);

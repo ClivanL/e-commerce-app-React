@@ -5,6 +5,7 @@ import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import QuantitySelector from "../components/QuantitySelector";
 import { LoginContext } from "../App";
 import NavbarNoLogin from "../components/NavbarNoLogin";
+import convertDateToString from "../functions/convertDateToString";
 
 interface productTypes {
   id: number;
@@ -15,6 +16,15 @@ interface productTypes {
   description: string;
   imageUrl: string;
   ownerId: number;
+  rating:number;
+  reviews:Review[];
+}
+
+interface Review {
+  reviewedAt:Date;
+  rating:number;
+  comments:String;
+  quantity:number;
 }
 
 function Product({ addToCart }: any) {
@@ -32,6 +42,7 @@ function Product({ addToCart }: any) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setProduct(data);
       });
   }, []);
@@ -42,10 +53,11 @@ function Product({ addToCart }: any) {
       {
         <div key={product?.id}>
           <ul>
-            <li>{product?.itemName}</li>
-            <li>${product?.price}</li>
-            <li>{product?.category}</li>
-            <li>{product?.description}</li>
+            <li>Item Name: {product?.itemName}</li>
+            <li>Price: ${product?.price}</li>
+            <li>Category: {product?.category}</li>
+            <li>Description: {product?.description}</li>
+            <li>Review by buyers: {product?.rating}/5</li>
           </ul>
           <img src={product?.imageUrl} />
           {userDetails?.userId ? (
@@ -75,6 +87,23 @@ function Product({ addToCart }: any) {
           ) : (
             ""
           )}
+          <table>
+            <header>Review by buyers</header>
+            <tr>
+            <th>Date reviewed</th>
+            <th>Quantity purchased</th>
+            <th>Rating</th>
+            <th>Comments</th>
+            </tr>
+            {product?.reviews.map((item)=>{
+              return <tr>
+                <td>{convertDateToString(item.reviewedAt)}</td>
+                <td>{item.quantity}</td>
+                <td>{item.rating}</td>
+                <td>{item.comments}</td>
+              </tr>
+            })}
+          </table>
         </div>
       }
     </>
