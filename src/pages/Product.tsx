@@ -21,6 +21,7 @@ interface productTypes {
 }
 
 interface Review {
+  id:number;
   reviewedAt:Date;
   rating:number;
   comments:String;
@@ -31,9 +32,10 @@ function Product({ addToCart }: any) {
   const [product, setProduct] = useState<productTypes>();
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
+  const [ratingChoice, setRatingChoice]=useState<number|String>("all")
   const login=useContext(LoginContext);
   useEffect(() => {
-    fetch(`http://localhost:15555/api/main/item/id/${productid}`, {
+    fetch(`http://localhost:15555/api/main/item/id/${productid}/${ratingChoice}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -45,7 +47,7 @@ function Product({ addToCart }: any) {
         console.log(data);
         setProduct(data);
       });
-  }, []);
+  }, [ratingChoice]);
   const { productid } = useParams();
   return (
     <>
@@ -87,8 +89,9 @@ function Product({ addToCart }: any) {
           ) : (
             ""
           )}
+          <div>Ratings {[1,2,3,4,5].map((item)=><button key={item} onClick={()=>setRatingChoice(item)} className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+      duration-500">{item}</button>)}</div>
           <table className="table-auto">
-            <header>Review by buyers</header>
             <thead>
             <tr>
             <th>Date reviewed</th>
@@ -97,14 +100,16 @@ function Product({ addToCart }: any) {
             <th>Comments</th>
             </tr>
             </thead>
+            <tbody>
             {product?.reviews.map((item)=>{
-              return <tr>
+              return <tr key={item.id}>
                 <td>{convertDateToString(item.reviewedAt)}</td>
                 <td>{item.quantity}</td>
                 <td>{item.rating}</td>
                 <td>{item.comments}</td>
               </tr>
             })}
+            </tbody>
           </table>
         </div>
       }
