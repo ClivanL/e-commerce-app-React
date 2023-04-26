@@ -16,32 +16,35 @@ interface productTypes {
   description: string;
   imageUrl: string;
   ownerId: number;
-  rating:number;
-  reviews:Review[];
+  rating: number;
+  reviews: Review[];
 }
 
 interface Review {
-  id:number;
-  reviewedAt:Date;
-  rating:number;
-  comments:String;
-  quantity:number;
+  id: number;
+  reviewedAt: Date;
+  rating: number;
+  comments: String;
+  quantity: number;
 }
 
 function Product({ addToCart }: any) {
   const [product, setProduct] = useState<productTypes>();
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
-  const [ratingChoice, setRatingChoice]=useState<number|String>("all")
-  const login=useContext(LoginContext);
+  const [ratingChoice, setRatingChoice] = useState<number | String>("recent");
+  const login = useContext(LoginContext);
   useEffect(() => {
-    fetch(`http://localhost:15555/api/main/item/id/${productid}/${ratingChoice}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `http://localhost:15555/api/main/item/id/${productid}/${ratingChoice}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -51,7 +54,7 @@ function Product({ addToCart }: any) {
   const { productid } = useParams();
   return (
     <>
-      {login||userDetails?.userId?<Navbar />:<NavbarNoLogin/>}
+      {login || userDetails?.userId ? <Navbar /> : <NavbarNoLogin />}
       {
         <div key={product?.id}>
           <ul>
@@ -89,26 +92,60 @@ function Product({ addToCart }: any) {
           ) : (
             ""
           )}
-          <div>Ratings {[1,2,3,4,5].map((item)=><button key={item} onClick={()=>setRatingChoice(item)} className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
-      duration-500">{item}</button>)}</div>
+          Ratings{" "}
+          {[5, 4, 3, 2, 1].map((item) => (
+            <div>
+              <button
+                key={item}
+                onClick={() => setRatingChoice(item)}
+                className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+      duration-500"
+              >
+                {item}
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={() => setRatingChoice("recent")}
+            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+      duration-500"
+          >
+            Most Recent
+          </button>
+          <button
+            onClick={() => setRatingChoice("helpful")}
+            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+      duration-500"
+          >
+            Most Helpful
+          </button>
+          <button
+            onClick={() => setRatingChoice("critical")}
+            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+      duration-500"
+          >
+            Most Critical
+          </button>
           <table className="table-auto">
             <thead>
-            <tr>
-            <th>Date reviewed</th>
-            <th>Quantity purchased</th>
-            <th>Rating</th>
-            <th>Comments</th>
-            </tr>
+              <tr>
+                <th>Date reviewed</th>
+                <th>Quantity purchased</th>
+                <th>Rating</th>
+                <th>Comments</th>
+              </tr>
             </thead>
             <tbody>
-            {product?.reviews.map((item)=>{
-              return <tr key={item.id}>
-                <td>{convertDateToString(item.reviewedAt)}</td>
-                <td>{item.quantity}</td>
-                <td>{item.rating}</td>
-                <td>{item.comments}</td>
-              </tr>
-            })}
+              {product?.reviews.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>{convertDateToString(item.reviewedAt)}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.rating}</td>
+                    <td>{item.comments}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
