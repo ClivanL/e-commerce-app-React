@@ -6,6 +6,7 @@ import QuantitySelector from "../components/QuantitySelector";
 import { LoginContext } from "../App";
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import convertDateToString from "../functions/convertDateToString";
+import StarsButton from "../components/StarsButton";
 
 interface productTypes {
   id: number;
@@ -28,7 +29,7 @@ interface Review {
   quantity: number;
 }
 
-function Product({ addToCart }: any) {
+function Product() {
   const [product, setProduct] = useState<productTypes>();
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
@@ -56,15 +57,17 @@ function Product({ addToCart }: any) {
     <>
       {login || userDetails?.userId ? <Navbar /> : <NavbarNoLogin />}
       {
-        <div key={product?.id}>
+        <div>
+          <p className="text-2xl font-extrabold">Item Details</p>
           <ul>
-            <li>Item Name: {product?.itemName}</li>
-            <li>Price: ${product?.price}</li>
-            <li>Category: {product?.category}</li>
-            <li>Description: {product?.description}</li>
-            <li>Review by buyers: {product?.rating}/5</li>
+            <li><span className="font-bold">Item Name: </span>{product?.itemName}</li>
+            <li><span className="font-bold">Price:</span> ${product?.price}</li>
+            <li><span className="font-bold">Category:</span> {product?.category}</li>
+            <li><span className="font-bold">Description:</span> {product?.description}</li>
+            <li><span className="font-bold">Review:</span>{product?.rating}/5</li>
+            <img src={product?.imageUrl} />
           </ul>
-          <img src={product?.imageUrl} />
+          
           {userDetails?.userId ? (
             <div>
               {click ? (
@@ -92,62 +95,61 @@ function Product({ addToCart }: any) {
           ) : (
             ""
           )}
-          Ratings{" "}
+          <div className="mt-10">
+          <div className="text-2xl font-[Poppins] font-extrabold">Ratings</div>
+          <div>
           {[5, 4, 3, 2, 1].map((item) => (
-            <div>
-              <button
-                key={item}
-                onClick={() => setRatingChoice(item)}
-                className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
-      duration-500"
-              >
-                {item}
-              </button>
-            </div>
+      <StarsButton key={item} setRatingChoice={setRatingChoice} rating={item}/>
           ))}
+          </div>
+          <div>
           <button
             onClick={() => setRatingChoice("recent")}
-            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+            className="bg-orange-700 text-white font-[Poppins] py-1 px-8 rounded border hover:bg-orange-400 
       duration-500"
           >
             Most Recent
           </button>
           <button
             onClick={() => setRatingChoice("helpful")}
-            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+            className="bg-orange-700 text-white font-[Poppins] py-1 px-8 rounded border hover:bg-orange-400 
       duration-500"
           >
             Most Helpful
           </button>
           <button
             onClick={() => setRatingChoice("critical")}
-            className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+            className="bg-orange-700 text-white font-[Poppins] py-1 px-8 rounded border hover:bg-orange-400 
       duration-500"
           >
             Most Critical
           </button>
-          <table className="table-auto">
-            <thead>
+          </div>
+          </div>
+          <div className="overflow-x-auto shadow-md rounded-lg mt-10">
+          <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th>Date reviewed</th>
-                <th>Quantity purchased</th>
-                <th>Rating</th>
-                <th>Comments</th>
+                <th scope="col" className="px-2 py-2">Rating</th>
+                <th scope="col" className="px-2 py-2">Date reviewed</th>
+                <th scope="col" className="px-2 py-2">Quantity purchased</th>
+                <th scope="col" className="px-10 py-2">Comments</th>
               </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               {product?.reviews.map((item) => {
                 return (
-                  <tr key={item.id}>
-                    <td>{convertDateToString(item.reviewedAt)}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.rating}</td>
-                    <td>{item.comments}</td>
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={item.id}>
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.rating}</th>
+                    <td className="px-2 py-2">{convertDateToString(item.reviewedAt)}</td>
+                    <td className="px-2 py-2">{item.quantity}</td>
+                    <td className="px-2 py-2">{item.comments}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          </div>
         </div>
       }
     </>
