@@ -19,7 +19,7 @@ interface productTypes {
   rating:number;
 }
 
-function Catalog({ addToCart }: any) {
+function Catalog() {
   const [products, setProducts] = useState<productTypes[]>();
   const [selection, setSelection] = useState();
   const { userDetails } = useRetrieveDetails();
@@ -56,7 +56,6 @@ function Catalog({ addToCart }: any) {
                 selection={selection}
                 setSelection={setSelection}
                 item={item}
-                addToCart={addToCart}
                 userId={userDetails?.userId}
               />
             </div>
