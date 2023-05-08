@@ -1,19 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IonIcon } from "react-ion-icon";
 
 interface props{
     userId:number;
     itemId:number;
+    like:Boolean;
 }
 
-export default function LikeButton({userId,itemId}:props){
-    const [click,setClick]=useState(false);
+export default function LikeButton({userId,itemId, like}:props){
+    const [click,setClick]=useState(like);
+    useEffect(()=>{
+        setClick(like);
+    },[like])
     const handleClick=()=>{
-        console.log("userId",userId);
-        console.log("itemId",itemId);
-        setClick(!click);
+        var resp:any;
+        fetch(`http://localhost:15555/api/main/favourite`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              "userId":userId,
+              "itemId":itemId
+            }),
+          })
+            .then((response) => {
+                resp=response;
+                return response.json()
+            })
+            .then((data) => {
+                if (resp.status!==200){
+                    alert(data.message);
+                }
+                else{
+                    setClick(!click);
+                }
+            });
+        
     }
     return <>
-    <span onClick={handleClick}>{click?<IonIcon name="heart"/>:<IonIcon name="heart-outline"/>}</span>
+    <span onClick={handleClick} className="text-red-500">{click?<IonIcon name="heart"/>:<IonIcon name="heart-outline"/>}</span>
     </>
 }

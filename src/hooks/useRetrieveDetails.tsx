@@ -9,6 +9,13 @@ interface Item {
   category: String;
   ownerId: number;
   quantity: number;
+  likes:number;
+}
+
+interface Favourite{
+  id:number;
+  userId:number;
+  itemId:number;
 }
 
 interface Cart {
@@ -28,6 +35,7 @@ interface UserDetails {
   username: String;
   listedItems:Item[];
   fulfillableCart:Boolean;
+  favourites:Favourite[];
 }
 
 export default function useRetrieveDetails() {

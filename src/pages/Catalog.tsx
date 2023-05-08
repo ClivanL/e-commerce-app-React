@@ -17,6 +17,7 @@ interface productTypes {
   imageUrl: string;
   ownerId: number;
   rating:number;
+  likes:number;
 }
 
 function Catalog() {
@@ -57,6 +58,7 @@ function Catalog() {
                 setSelection={setSelection}
                 item={item}
                 userId={userDetails?.userId}
+                like={userDetails?.favourites.filter((ele)=>ele.itemId===item.id).length===1?true:false}
               />
             </div>
           );
