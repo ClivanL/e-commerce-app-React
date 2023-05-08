@@ -7,6 +7,7 @@ import { LoginContext } from "../App";
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import convertDateToString from "../functions/convertDateToString";
 import StarsButton from "../components/StarsButton";
+import LikeButton from "../components/LikeButton";
 
 interface productTypes {
   id: number;
@@ -69,7 +70,7 @@ function Product() {
           </ul>
           
           {userDetails?.userId ? (
-            <div>
+            <div className="justify-center flex items-end">
               {click ? (
                 <QuantitySelector
                   userId={userDetails?.userId}
@@ -85,12 +86,13 @@ function Product() {
                   Add to Cart
                 </button>
               )}
-              <button
+              {/* <button
                 className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
       duration-500"
               >
                 Like
-              </button>
+              </button> */}
+              <span className="ml-2 text-3xl"><LikeButton userId={userDetails?.userId} itemId={parseInt(productid!)} like={userDetails?.favourites.filter((ele)=>ele.itemId===parseInt(productid!)).length===1?true:false}/></span>
             </div>
           ) : (
             ""
