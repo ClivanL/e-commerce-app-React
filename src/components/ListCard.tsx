@@ -3,7 +3,7 @@ import QuantitySelectionForm from './QuantitySelectionForm';
 import RatingDisplay from './RatingDisplay';
 import LikeButton from './LikeButton';
 
-function ListCard({item, selection, setSelection, userId, like}:any){
+function ListCard({item, selection, setSelection, userId, like, setRefresh, refresh}:any){
 
 const navigate=useNavigate();
 const handleClick=(dest:string)=>{
@@ -22,7 +22,8 @@ const handleClick=(dest:string)=>{
         </a>
         <div className="flex items-center mt-2.5 mb-5">
             <RatingDisplay rating={item.rating}/>
-            <LikeButton userId={userId} itemId={item.id} like={like}/>
+            <LikeButton userId={userId} itemId={item.id} like={like} setRefresh={setRefresh} refresh={refresh}/>
+            <span className="ml-2 text-red-500">{item.likes}</span>
         </div>
         <div className="flex items-center justify-between">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">${item.price}</span>

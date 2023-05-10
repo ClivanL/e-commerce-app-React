@@ -5,9 +5,11 @@ interface props{
     userId:number;
     itemId:number;
     like:Boolean;
+    setRefresh:any;
+    refresh:any;
 }
 
-export default function LikeButton({userId,itemId, like}:props){
+export default function LikeButton({userId,itemId, like, setRefresh, refresh}:props){
     const [click,setClick]=useState(like);
     useEffect(()=>{
         setClick(like);
@@ -35,6 +37,7 @@ export default function LikeButton({userId,itemId, like}:props){
                 }
                 else{
                     setClick(!click);
+                    setRefresh(!refresh);
                 }
             });
         

@@ -20,6 +20,7 @@ interface productTypes {
   ownerId: number;
   rating: number;
   reviews: Review[];
+  likes:number
 }
 
 interface Review {
@@ -35,6 +36,7 @@ function Product() {
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
   const [ratingChoice, setRatingChoice] = useState<number | String>("recent");
+  const [refresh, setRefresh]=useState(false);
   const login = useContext(LoginContext);
   useEffect(() => {
     fetch(
@@ -52,7 +54,7 @@ function Product() {
         console.log(data);
         setProduct(data);
       });
-  }, [ratingChoice]);
+  }, [ratingChoice, refresh]);
   const { productid } = useParams();
   return (
     <>
@@ -86,13 +88,8 @@ function Product() {
                   Add to Cart
                 </button>
               )}
-              {/* <button
-                className="bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
-      duration-500"
-              >
-                Like
-              </button> */}
-              <span className="ml-2 text-3xl"><LikeButton userId={userDetails?.userId} itemId={parseInt(productid!)} like={userDetails?.favourites.filter((ele)=>ele.itemId===parseInt(productid!)).length===1?true:false}/></span>
+              <span className="ml-2 text-3xl"><LikeButton userId={userDetails?.userId} itemId={parseInt(productid!)} like={userDetails?.favourites.filter((ele)=>ele.itemId===parseInt(productid!)).length===1?true:false} refresh={refresh} setRefresh={setRefresh}/></span>
+              <span>{product?.likes}</span>
             </div>
           ) : (
             ""

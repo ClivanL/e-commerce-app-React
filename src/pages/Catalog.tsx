@@ -24,7 +24,7 @@ function Catalog() {
   const [products, setProducts] = useState<productTypes[]>();
   const [selection, setSelection] = useState();
   const { userDetails } = useRetrieveDetails();
-  const [category, setCategory]=useState("");
+  const [refresh, setRefresh]=useState(false);
   useEffect(() => {
     fetch(`http://localhost:15555/api/main/item/${
       choice==="All Products"?"all":choice
@@ -40,7 +40,7 @@ function Catalog() {
         console.log(data);
         setProducts(data);
       });
-  }, []);
+  }, [refresh]);
   const { login } = useContext(LoginContext);
   const { choice } = useParams();
   return (
@@ -59,6 +59,8 @@ function Catalog() {
                 item={item}
                 userId={userDetails?.userId}
                 like={userDetails?.favourites.filter((ele)=>ele.itemId===item.id).length===1?true:false}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
             </div>
           );
