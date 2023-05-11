@@ -16,6 +16,7 @@ interface Favourite{
   id:number;
   userId:number;
   itemId:number;
+  item:Item;
 }
 
 interface Cart {
@@ -38,7 +39,7 @@ interface UserDetails {
   favourites:Favourite[];
 }
 
-export default function useRetrieveDetails() {
+export default function useRetrieveDetails(refresh?:any) {
   const [userDetails, setUserDetails] = useState<UserDetails>();
   useEffect(() => {
     fetch(`http://localhost:15555/api/main/retrieveAccountDetails`, {
@@ -53,6 +54,6 @@ export default function useRetrieveDetails() {
         console.log(data);
         setUserDetails(data);
       });
-  }, []);
+  }, [refresh]);
   return {userDetails, setUserDetails};
 }

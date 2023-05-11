@@ -39,7 +39,8 @@ function Navbar(){
       <span onClick={()=>moveToPage("category")} className="px-3 hover:text-green-300">
         Product Catalog
       </span>
-      <span onClick={()=>moveToPage("mycart")} className="text-2xl px-3 hover:text-green-300"><IonIcon name="cart-sharp"/></span>
+      <span onClick={()=>moveToPage("mycart")} className="text-2xl px-2 hover:text-green-300"><IonIcon name="cart-sharp"/></span>
+      <span onClick={()=>moveToPage("likedItems")} className="text-2xl px-2 hover:text-green-300"><IonIcon name="heart-sharp"/></span>
       <div>
     <span onClick={()=>setOpen(!open)} className={`text-2xl ${!open?"relative hover:text-green-300":"text-green-300"}`}>
     <IonIcon name="person-circle-outline"/>

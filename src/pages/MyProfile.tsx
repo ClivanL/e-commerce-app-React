@@ -20,7 +20,7 @@ export default function MyProfile() {
           <div>
             <button
               onClick={() => navigate("/changepassword")}
-              className="bg-red-500 rounded w-auto h-auto hover:bg-red-900"
+              className="px-2 py-1 mt-2 bg-red-500 rounded w-auto h-auto hover:bg-red-900"
             >
               Change Password
             </button>
