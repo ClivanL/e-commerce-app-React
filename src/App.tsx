@@ -19,41 +19,7 @@ import ReviewPurchase from './pages/ReviewPurchase';
 import MyProfile from './pages/MyProfile';
 import ChangePassword from './pages/ChangePassword';
 import LikedItems from './pages/LikedItems';
-
-interface productTypes {
-  name:string,
-  price:number,
-  category:string,
-  description:string,
-  imgUrl:string
-}
-
-interface userAccountTypes{
-  id:number,
-  name:string,
-  username:string,
-  password:string,
-  productsId:[]
-}
-
-interface Item {
-  id: number;
-  itemName: String;
-  price: number;
-  description: String;
-  imageUrl: String;
-  category: String;
-  ownerId: number;
-  quantity: number;
-}
-
-interface Cart {
-  id:number;
-  userId:number;
-  itemId:number;
-  quantity:number;
-  item:Item
-}
+import { Cart } from '../interfaces';
 
 export const LoginContext= createContext<any>(null);
 export const SessionContext=createContext<any>(null);
@@ -61,18 +27,8 @@ export const CheckOutContext=createContext<any>(null);
 
 function App(){
   const [login, setLogin]=useState(false)
-  const [cart,setCart]=useState<productTypes[]>([])
-  const [userAccounts, setUserAccounts]=useState<userAccountTypes[]>([])
   const [sessionToken, setSessionToken]=useState("")
   const [checkOut, setCheckOut]=useState<Cart[]>();
-
-  const addToCart=(newProduct:productTypes)=>{
-    setCart([...cart, newProduct])
-  }
-
-  const addNewAccount=(newAccount:userAccountTypes)=>{
-    setUserAccounts([...userAccounts, newAccount]);
-  }
 
   const categories=["Snacks", "Candies", "Toys", "Electronics", "Shoes"]
 
@@ -90,15 +46,15 @@ function App(){
       <Route path="/category" element={<Category categories={categories}/>}/>
       <Route path="/category/:choice" element={<Catalog/>}/>
       <Route path="/category/:choice/:productid" element={<Product/>}/>
-      <Route path="/mycart" element={<MyCart cart={cart}/>}/>
+      <Route path="/mycart" element={<MyCart/>}/>
       <Route path="/checkout" element={<CheckOutSuccessful/>}/>
-      <Route path="/signup" element={<SignUp addNewAccount={addNewAccount}/>} />
+      <Route path="/signup" element={<SignUp/>} />
       <Route path="/purchasehistory" element={<PurchaseHistory/>}/>
       <Route path="/salehistory" element={<SaleHistory/>}/>
       <Route path="/listeditems" element={<ListedItem/>}/>
       <Route path="/review/new/:purchaseLogId" element={<ReviewPurchase/>}/>
       <Route path="/likedItems" element={<LikedItems/>}/>
-      <Route path="/:productid" element={<Product/>}/>
+      <Route path="/likedItems/:productid" element={<Product/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>

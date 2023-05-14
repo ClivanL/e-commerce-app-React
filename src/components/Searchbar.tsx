@@ -36,7 +36,7 @@ export default function Searchbar(){
     return <>
     <div className="px-8">
     <form onKeyUp={handleSearch}>
-        <input className="text-black rounded w-64" id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <input className="text-black rounded px-2 py-1 w-64" id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
     </form>
     {
         results?

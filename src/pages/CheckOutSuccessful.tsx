@@ -1,25 +1,7 @@
 import Navbar from "../components/Navbar";
 import { useContext } from "react";
 import { CheckOutContext } from "../App";
-
-interface Item {
-    id: number;
-    itemName: String;
-    price: number;
-    description: String;
-    imageUrl: String;
-    category: String;
-    ownerId: number;
-    quantity: number;
-  }
-
-  interface Cart {
-    id:number;
-    userId:number;
-    itemId:number;
-    quantity:number;
-    item:Item
-  }
+import { Cart } from "../../interfaces";
 
 export default function CheckOutSuccessful(){
     const {checkOut}= useContext(CheckOutContext);

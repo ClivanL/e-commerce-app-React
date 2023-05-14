@@ -1,30 +1,5 @@
 import { useEffect, useState } from "react";
-
-    interface Item {
-    id: number;
-    itemName: String;
-    price: number;
-    description: String;
-    imageUrl: String;
-    category: String;
-    ownerId: number;
-    quantity: number;
-  }
-  
-  interface PurchaseLog {
-    id:number;
-    userId:number;
-    itemId:number;
-    quantity:number;
-    item:Item;
-    createdAt:Date;
-    ownerUsername:String;
-    sent:Boolean;
-    received:Boolean;
-    reviewedAt:Date;
-    rating:number;
-    comments:String;
-  }
+import { PurchaseLog } from "../../interfaces";
 
   
 export default function useRetrievePurchaseHistory(update?:Boolean) {

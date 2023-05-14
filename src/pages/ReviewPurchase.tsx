@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import { useContext, useState } from "react";
 import { LoginContext } from "../App";
 import UserNotLoggedIn from "./UserNotLoggedIn";
@@ -63,10 +62,6 @@ export default function ReviewPurchase() {
             }
           </p>
           <form>
-            {/* <div>
-            Ratings:
-            <input type="number" placeholder="Choose number of stars" value={review.rating} onChange={(e)=>setReview({...review, rating:parseInt(e.target.value)})}/>
-            </div> */}
             <div>
             <label>Rating:</label>
             <select value={review.rating} onChange={(e)=>setReview({...review, rating:parseInt(e.target.value)})}>

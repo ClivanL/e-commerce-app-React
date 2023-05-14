@@ -1,27 +1,14 @@
 import Navbar from "../components/Navbar";
-// import products from "../../products.json"
 import { useParams } from "react-router-dom";
 import ListCard from "../components/ListCard";
 import { LoginContext } from "../App";
 import { useContext, useEffect, useState } from "react";
 import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
-
-interface productTypes {
-  id: number;
-  itemName: string;
-  price: number;
-  quantity: number;
-  category: string;
-  description: string;
-  imageUrl: string;
-  ownerId: number;
-  rating:number;
-  likes:number;
-}
+import { Item } from "../../interfaces";
 
 function Catalog() {
-  const [products, setProducts] = useState<productTypes[]>();
+  const [products, setProducts] = useState<Item[]>();
   const [selection, setSelection] = useState();
   const { userDetails } = useRetrieveDetails();
   const [refresh, setRefresh]=useState(false);
@@ -50,9 +37,9 @@ function Catalog() {
       <h2>Choice of category: {choice}</h2>
       <div className="flex">
       {products
-        ?.map((item: productTypes) => {
+        ?.map((item: Item) => {
           return (
-            <div key={item.itemName}>
+            <div key={item.id}>
               <ListCard
                 selection={selection}
                 setSelection={setSelection}

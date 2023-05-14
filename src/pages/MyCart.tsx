@@ -1,35 +1,14 @@
 import { useContext } from "react";
-import Button from "../components/Button";
 import Navbar from "../components/Navbar";
-import NavbarNoLogin from "../components/NavbarNoLogin";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import { CheckOutContext, LoginContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import UserNotLoggedIn from "./UserNotLoggedIn";
+import { IonIcon } from "react-ion-icon";
+import { Cart } from "../../interfaces";
 
-interface Item {
-  id: number;
-  itemName: String;
-  price: number;
-  description: String;
-  imageUrl: String;
-  category: String;
-  ownerId: number;
-  quantity: number;
-}
-
-interface Cart {
-  id: number;
-  userId: number;
-  itemId: number;
-  quantity: number;
-  item: Item;
-  sufficient: Boolean;
-}
-
-function MyCart({ cart }: any) {
+function MyCart() {
   const { userDetails, setUserDetails } = useRetrieveDetails();
-  // const [cartDetails, setCartDetails]=useState((userDetails)?[...userDetails?.carts]:[]);
   const navigate = useNavigate();
   const { setCheckOut } = useContext(CheckOutContext);
   const login = useContext(LoginContext);
@@ -106,23 +85,27 @@ function MyCart({ cart }: any) {
       {login || userDetails?.userId ? (
         <div>
           <Navbar />
-          <h1>My cart</h1>
-          <table>
-            <tbody>
+          <div className="text-3xl mb-2 font-extrabold"><IonIcon name="cart"/> My cart</div>
+          <div className="overflow-x-auto shadow-md rounded-lg">
+          <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Delete</th>
+                <th scope="col" className="px-2 py-2">Item</th>
+                <th scope="col" className="px-2 py-2">Price</th>
+                <th scope="col" className="px-2 py-2">Category</th>
+                <th scope="col" className="px-2 py-2">Quantity</th>
+                <th scope="col" className="px-2 py-2">Delete</th>
               </tr>
-              {userDetails?.carts?.map((details: any) => (
-                <tr key={details.item.description}>
-                  <td>{details.item.itemName}</td>
-                  <td>{details.item.price}</td>
-                  <td>{details.item.category}</td>
-                  <td>
-                    <button
+              </thead>
+              <tbody>
+              {userDetails?.carts.map((details) => {
+                return (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={details.item.id}>
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{details.item.itemName}</th>
+                    <td className="px-2 py-2">{details.item.price}</td>
+                    <td className="px-2 py-2">{details.item.category}</td>
+                    <td className="px-2 py-2">
+                    <button className="font-bold"
                       onClick={() => {
                         handleQuantityChange("-", details.item.id);
                       }}
@@ -143,20 +126,24 @@ function MyCart({ cart }: any) {
                     >
                       +
                     </button>
-                  </td>
-                  <td>
+
+                    </td>
+                    <td className="px-2 py-2 hover:text-red-500">
                     <button onClick={() => handleDeleteItem(details.id)}>
                       Delete
                     </button>
                   </td>
-                </tr>
-              ))}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
-          {userDetails?.fulfillableCart ||
+          </div>
+          <div className="mt-10">
+          {userDetails?.fulfillableCart &&
           userDetails?.carts.filter((ele) => !ele.sufficient).length === 0 ? (
             <button
-              className="bg-blue-500 w-auto h-auto border-spacing-3 border border-black rounded  hover:bg-blue-900"
+              className="bg-green-500 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-green-600"
               onClick={handleCheckOut}
             >
               Check out
@@ -164,16 +151,17 @@ function MyCart({ cart }: any) {
           ) : (
             <div>
               <button
-                className="bg-gray-600 w-auto h-auto border-spacing-3 border border-black rounded"
+                className="bg-gray-600 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border border-black rounded"
                 disabled
               >
                 Check Out
               </button>
-              <p className="text-red-600 text-xs">
+              <p className="text-red-600 text-lg px-2 py-1 text-xs">
                 Cart cannot be fulfilled, insufficient quantity!
               </p>
             </div>
           )}
+          </div>
         </div>
       ) : (
         <UserNotLoggedIn />

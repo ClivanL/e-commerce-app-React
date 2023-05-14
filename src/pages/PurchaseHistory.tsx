@@ -6,32 +6,7 @@ import { useContext, useState } from "react";
 import { LoginContext } from "../App";
 import { IonIcon } from "react-ion-icon";
 import { useNavigate } from "react-router-dom";
-
-interface Item {
-  id: number;
-  itemName: String;
-  price: number;
-  description: String;
-  imageUrl: String;
-  category: String;
-  ownerId: number;
-  quantity: number;
-}
-
-interface PurchaseLog {
-  id: number;
-  userId: number;
-  itemId: number;
-  quantity: number;
-  item: Item;
-  createdAt: Date;
-  ownerUsername: String;
-  sent: Boolean;
-  received: Boolean;
-  reviewedAt: Date;
-  rating: number;
-  comments: String;
-}
+import { PurchaseLog } from "../../interfaces";
 
 export default function PurchaseHistory() {
   const [update, setUpdate] = useState(false);

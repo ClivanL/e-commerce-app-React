@@ -2,29 +2,9 @@ import Navbar from "../components/Navbar";
 import useRetrieveSaleHistory from "../hooks/useRetrieveSaleHistory";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import convertDateToString from "../functions/convertDateToString";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { LoginContext } from "../App";
 
-interface Item {
-  id: number;
-  itemName: String;
-  price: number;
-  description: String;
-  imageUrl: String;
-  category: String;
-  ownerId: number;
-  quantity: number;
-}
-
-interface SaleLog {
-  id: number;
-  userId: number;
-  itemId: number;
-  quantity: number;
-  item: Item;
-  createdAt: Date;
-  userUsername: String;
-}
 
 export default function SaleHistory() {
   const [update, setUpdate] = useState(false);

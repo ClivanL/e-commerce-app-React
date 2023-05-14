@@ -1,29 +1,5 @@
 import { ReactComponentElement, ReactElement, useEffect, useState } from "react";
-
-interface Item {
-    id: number;
-    itemName: String;
-    price: number;
-    description: String;
-    imageUrl: String;
-    category: String;
-    ownerId: number;
-    quantity: number;
-  }
-  
-  interface SaleLog {
-    id:number;
-    userId:number;
-    itemId:number;
-    quantity:number;
-    item:Item;
-    createdAt:Date;
-    userUsername:String;
-    sent:Boolean;
-    reviewedAt:Date;
-    rating:number;
-    comments:String;
-  }
+import { SaleLog } from "../../interfaces";
 
 
 export default function useRetrieveSaleHistory(update:Boolean){

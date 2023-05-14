@@ -1,43 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface Item {
-  id: number;
-  itemName: String;
-  price: number;
-  description: String;
-  imageUrl: String;
-  category: String;
-  ownerId: number;
-  quantity: number;
-  likes:number;
-}
-
-interface Favourite{
-  id:number;
-  userId:number;
-  itemId:number;
-  item:Item;
-}
-
-interface Cart {
-  id:number;
-  userId:number;
-  itemId:number;
-  quantity:number;
-  item:Item;
-  sufficient:Boolean;
-}
-
-interface UserDetails {
-  userId: number,
-  email: String;
-  carts: Cart[];
-  name: String;
-  username: String;
-  listedItems:Item[];
-  fulfillableCart:Boolean;
-  favourites:Favourite[];
-}
+import { UserDetails } from "../../interfaces";
 
 export default function useRetrieveDetails(refresh?:any) {
   const [userDetails, setUserDetails] = useState<UserDetails>();

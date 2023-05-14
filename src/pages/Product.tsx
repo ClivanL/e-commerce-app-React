@@ -8,31 +8,10 @@ import NavbarNoLogin from "../components/NavbarNoLogin";
 import convertDateToString from "../functions/convertDateToString";
 import StarsButton from "../components/StarsButton";
 import LikeButton from "../components/LikeButton";
-
-interface productTypes {
-  id: number;
-  itemName: string;
-  price: number;
-  quantity: number;
-  category: string;
-  description: string;
-  imageUrl: string;
-  ownerId: number;
-  rating: number;
-  reviews: Review[];
-  likes:number
-}
-
-interface Review {
-  id: number;
-  reviewedAt: Date;
-  rating: number;
-  comments: String;
-  quantity: number;
-}
+import { Item } from "../../interfaces";
 
 function Product() {
-  const [product, setProduct] = useState<productTypes>();
+  const [product, setProduct] = useState<Item>();
   const { userDetails } = useRetrieveDetails();
   const [click, setClick] = useState(false);
   const [ratingChoice, setRatingChoice] = useState<number | String>("recent");

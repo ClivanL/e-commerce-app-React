@@ -10,9 +10,6 @@ function Login() {
   const { setSessionToken } = useContext(SessionContext);
   const handleLogin = (event: any) => {
     event.preventDefault();
-    // console.log(event.target.username.value);
-    // const condition=users.filter((item)=>item.username===event.target.username.value && item.password===event.target.password.value)
-    // console.log(condition)
     fetch(`http://localhost:15555/home/login`, {
       method: "POST",
       credentials: "include",
