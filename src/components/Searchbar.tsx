@@ -1,19 +1,11 @@
 import { useState } from "react"
+import { IonIcon } from "react-ion-icon";
 import { useNavigate } from "react-router-dom";
+import { Item } from "../../interfaces";
 
-interface productTypes {
-    id:number;
-    itemName:string,
-    price:number,
-    quantity:number,
-    category:string,
-    description:string,
-    imageUrl:string,
-    ownerId:number
-}
 export default function Searchbar(){
     const [search, setSearch]=useState("");
-    const [results,setResults]=useState<productTypes[]>();
+    const [results,setResults]=useState<Item[]>();
     const navigate=useNavigate();
     const handleSearch=()=>{
         var resp:any;
@@ -36,12 +28,16 @@ export default function Searchbar(){
     return <>
     <div className="px-8">
     <form onKeyUp={handleSearch}>
-        <input className="text-black rounded px-2 py-1 w-64" id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <input className="text-black rounded px-2 py-1 w-96" id="product" name="product" placeholder="Enter product name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <span onClick={()=>{
+          setSearch("");
+          setResults([]);
+          navigate(`/search/${search}`)}} className='px-1 text-2xl hover:text-green-300'><IonIcon name='search-sharp'/></span>
     </form>
     {
         results?
     <ul className="bg-black rounded">
-        {results?.map((item:productTypes)=>{
+        {results?.map((item:Item)=>{
             return <li className="hover:text-black hover:bg-green-600" onClick={()=>navigate(`/category/${item.category}/${item.id}`)} key={item.id}>{item.itemName}</li>
         })}
     </ul>:""}

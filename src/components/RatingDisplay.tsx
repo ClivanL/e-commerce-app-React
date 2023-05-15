@@ -9,19 +9,18 @@ export default function RatingDisplay({rating}:props){
     const generateDisplay=(rating:number)=>{
         const display=[]
         let stars=5;
-        console.log(rating);
         while(rating>=1){
+            display.push(<IonIcon key={stars} name="star"/>)
             rating-=1;
-            stars-=1;
-            display.push(<IonIcon name="star"/>)
+            stars-=1;         
         }
         if (Math.floor(rating)!==rating){
-            display.push(<IonIcon name="star-half-outline"/>);
+            display.push(<IonIcon key={stars} name="star-half-outline"/>);
             stars-=1;
         }
         while(stars>0){
-            stars-=1;
-            display.push(<IonIcon name="star-outline"/>);
+            display.push(<IonIcon key={stars} name="star-outline"/>);
+            stars-=1;       
         }
         return display;
     }

@@ -20,6 +20,7 @@ import MyProfile from './pages/MyProfile';
 import ChangePassword from './pages/ChangePassword';
 import LikedItems from './pages/LikedItems';
 import { Cart } from '../interfaces';
+import Search from './pages/Search';
 
 export const LoginContext= createContext<any>(null);
 export const SessionContext=createContext<any>(null);
@@ -55,6 +56,7 @@ function App(){
       <Route path="/review/new/:purchaseLogId" element={<ReviewPurchase/>}/>
       <Route path="/likedItems" element={<LikedItems/>}/>
       <Route path="/likedItems/:productid" element={<Product/>}/>
+      <Route path="/search/:search?" element={<Search/>}/>
       {/* <Route path="/catalog" element={<Catalog productList={productList} setLogin={setLogin}/>} /> */}
       <Route path="/newproduct" element={<NewProduct categories={categories}/>} />
       <Route path="/login" element={<Login/>}/>
