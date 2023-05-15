@@ -51,6 +51,7 @@ function Navbar(){
     <li onClick={()=>moveToPage("purchasehistory")} className="hover:text-green-300">My purchase History</li>
     <li onClick={()=>moveToPage("salehistory")} className="hover:text-green-300">My sale history</li>
     <li onClick={()=>moveToPage("listeditems")} className="hover:text-green-300">My listed items</li>
+    <li onClick={()=>moveToPage("statistics")} className="hover:text-green-300">Statistics</li>
     <li onClick={handleLogout} className="hover:text-green-300">Logout</li>
     </ul>
     :""}

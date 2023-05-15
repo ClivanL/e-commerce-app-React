@@ -37,6 +37,7 @@ export interface UserDetails {
     listedItems:Item[];
     fulfillableCart:Boolean;
     favourites:Favourite[];
+    balance:number; //user balance, feature to be added
   }
 
 export interface PurchaseLog {
