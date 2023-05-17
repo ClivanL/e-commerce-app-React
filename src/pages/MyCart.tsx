@@ -60,7 +60,7 @@ function MyCart() {
       }
     });
     if (newCart) {
-      setUserDetails({ ...userDetails!, carts: newCart});
+      setUserDetails({ ...userDetails!, carts: newCart, fulfillableCart:newCart.filter((item)=>!item.sufficient).length>0?false:true });
     }
   };
 

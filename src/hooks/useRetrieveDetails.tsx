@@ -13,6 +13,7 @@ export default function useRetrieveDetails(refresh?:any) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setUserDetails(data);
       });
   }, [refresh]);
