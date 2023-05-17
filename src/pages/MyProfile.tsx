@@ -17,7 +17,7 @@ export default function MyProfile() {
           <p className="font-extrabold text-lg">Profile page</p>
           <p>Name: {userDetails?.name}</p>
           <p>Email: {userDetails?.email}</p>
-          <p>Account Balance: ${userDetails?.balance} (feature to be added)</p>
+          <p>Account Balance: ${userDetails?.balance}</p>
           <div>
             <button
               onClick={() => navigate("/changepassword")}

@@ -60,7 +60,7 @@ function MyCart() {
       }
     });
     if (newCart) {
-      setUserDetails({ ...userDetails!, carts: newCart });
+      setUserDetails({ ...userDetails!, carts: newCart});
     }
   };
 
@@ -78,7 +78,7 @@ function MyCart() {
         "Content-Type": "application/json",
       },
     });
-    setUserDetails({ ...userDetails!, carts: newCart });
+    setUserDetails({ ...userDetails!, carts: newCart, fulfillableCart:newCart.filter((item)=>!item.sufficient).length>0?false:true });
   };
   return (
     <>
