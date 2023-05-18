@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import Navbar from '../components/Navbar';
 import {useNavigate} from 'react-router-dom'
+import NavbarNoLogin from '../components/NavbarNoLogin';
 
 function SignUp(){
 
@@ -40,7 +41,7 @@ function SignUp(){
     }
 
     return <>
-    <Navbar/>
+    <NavbarNoLogin/>
     <form>
     <div className="bg-grey-lighter min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

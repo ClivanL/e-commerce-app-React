@@ -37,7 +37,7 @@ function Product() {
   const { productid } = useParams();
   return (
     <>
-      {login || userDetails?.userId ? <Navbar /> : <NavbarNoLogin />}
+      {login || userDetails?.userId ? <Navbar balance={userDetails?.balance!}/> : <NavbarNoLogin />}
       {
         <div>
           <p className="text-2xl font-extrabold">Item Details</p>

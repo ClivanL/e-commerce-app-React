@@ -14,7 +14,7 @@ function MyCart() {
   const login = useContext(LoginContext);
 
   const handleCheckOut = () => {
-    console.log("Check out");
+    var resp:any;
     fetch(`http://localhost:15555/api/main/cart/checkOutCart`, {
       method: "POST",
       credentials: "include",
@@ -23,16 +23,16 @@ function MyCart() {
       },
       body: JSON.stringify(userDetails),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        resp=response;
+        return response.json();})
       .then((data) => {
-        if (!data.error) {
-          console.log(data);
+        if (resp.status===200) {
           setCheckOut(userDetails?.carts);
           setUserDetails(data);
           navigate("/checkout");
         } else {
-          console.log("transaction failed");
-          alert("Transaction failed, insufficient quantity");
+          alert(data.message);
         }
       });
   };
@@ -84,7 +84,7 @@ function MyCart() {
     <>
       {login || userDetails?.userId ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <div className="text-3xl mb-2 font-extrabold">
             <IonIcon name="cart" /> My cart
           </div>

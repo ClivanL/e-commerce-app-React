@@ -12,7 +12,7 @@ export default function LikedItems() {
     <>
       {userDetails?.userId ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <span className="text-xl font-extrabold">Liked items here</span>
           {userDetails?.favourites.map((x) => {
             return (

@@ -4,11 +4,13 @@ import UserNotLoggedIn from "./UserNotLoggedIn";
 import convertDateToString from "../functions/convertDateToString";
 import { useContext, useState } from "react";
 import { LoginContext } from "../App";
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 
 export default function SaleHistory() {
   const [update, setUpdate] = useState(false);
   const { saleHistory } = useRetrieveSaleHistory(update);
+  const {userDetails} = useRetrieveDetails();
 
   const login = useContext(LoginContext);
   const handleConfirm = (id: number) => {
@@ -37,7 +39,7 @@ export default function SaleHistory() {
     <>
       {login || saleHistory ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           Sale history shown here
           <div className="overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

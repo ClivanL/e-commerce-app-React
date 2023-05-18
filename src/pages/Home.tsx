@@ -12,7 +12,7 @@ function Home(){
     return(<>
     {(login||userDetails?.userId)?
     <div>
-    <Navbar/>
+    <Navbar balance={userDetails?.balance!}/>
     This is the start of the app. 
     <h1 className="text-4xl font-bold underline">
     Hello {userDetails?.username}!

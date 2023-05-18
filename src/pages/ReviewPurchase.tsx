@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { LoginContext } from "../App";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import useRetrievePurchaseHistory from "../hooks/useRetrievePurchaseHistory";
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 interface Review {
   rating: number;
@@ -13,6 +14,7 @@ interface Review {
 export default function ReviewPurchase() {
   const { purchaseLogId } = useParams();
   const { purchaseHistory } = useRetrievePurchaseHistory();
+  const {userDetails}=useRetrieveDetails();
   const navigate = useNavigate();
   const login = useContext(LoginContext);
   const [review, setReview] = useState<Review>({ rating: 0, comments: "" });
@@ -44,7 +46,7 @@ export default function ReviewPurchase() {
     <>
       {login || purchaseHistory ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <p>
             You are reviewing for{" "}
             {

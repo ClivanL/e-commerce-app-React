@@ -75,7 +75,7 @@ export default function ListedItem() {
   };
   return (
     <>
-      {login||userDetails?.userId?<div><Navbar />
+      {login||userDetails?.userId?<div><Navbar balance={userDetails?.balance!}/>
       Listed Items here
       {click===true?<p>New quantity must be more than {currentQuantity}</p>:""}
       <table>

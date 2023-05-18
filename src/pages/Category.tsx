@@ -9,7 +9,7 @@ function Category({categories}:any){
 const {login} = useContext(LoginContext)
 const {userDetails}=useRetrieveDetails();
     return <>
-    {(login||userDetails?.userId)?<Navbar/>:<NavbarNoLogin/>}
+    {(login||userDetails?.userId)?<Navbar balance={userDetails?.balance!}/>:<NavbarNoLogin/>}
     <h1>Categories list here-cards</h1>
     <div className="inline-flex">
         <CategoryCard key="All Products" cat="All Products"/>

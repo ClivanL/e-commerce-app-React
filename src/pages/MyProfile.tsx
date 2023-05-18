@@ -13,7 +13,7 @@ export default function MyProfile() {
     <>
       {login || userDetails?.userId ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <p className="font-extrabold text-lg">Profile page</p>
           <p>Name: {userDetails?.name}</p>
           <p>Email: {userDetails?.email}</p>

@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
 import {useState, useContext} from 'react'
 import {IonIcon} from "react-ion-icon"
 import { LoginContext } from "../App";
-import LogoutButton from "./LogoutButton";
 import Searchbar from "./Searchbar";
 
-function Navbar(){
+interface props{
+  balance:number;
+}
+
+function Navbar({balance}:props){
     let [open,setOpen]=useState(false);
     const navigate=useNavigate();
     const moveToPage=(dest:String)=>{
@@ -41,6 +43,7 @@ function Navbar(){
       </span>
       <span onClick={()=>moveToPage("mycart")} className="text-2xl px-2 hover:text-green-300"><IonIcon name="cart-sharp"/></span>
       <span onClick={()=>moveToPage("likedItems")} className="text-2xl px-2 hover:text-green-300"><IonIcon name="heart-sharp"/></span>
+      <div className="text-2xl px-2 hover:text-green-300"><IonIcon name="wallet"/><span className="text-xs">${balance}</span></div>
       <div>
     <span onClick={()=>setOpen(!open)} className={`text-2xl ${!open?"relative hover:text-green-300":"text-green-300"}`}>
     <IonIcon name="person-circle-outline"/>

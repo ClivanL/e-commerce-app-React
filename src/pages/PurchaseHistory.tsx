@@ -7,11 +7,13 @@ import { LoginContext } from "../App";
 import { IonIcon } from "react-ion-icon";
 import { useNavigate } from "react-router-dom";
 import { PurchaseLog } from "../../interfaces";
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 export default function PurchaseHistory() {
   const [update, setUpdate] = useState(false);
-  const { purchaseHistory, setPurchaseHistory } =
+  const { purchaseHistory} =
     useRetrievePurchaseHistory(update);
+  const {userDetails}=useRetrieveDetails();
   const login = useContext(LoginContext);
   const navigate = useNavigate();
   const handleReceived = (id: number) => {
@@ -41,7 +43,7 @@ export default function PurchaseHistory() {
     <>
       {login || purchaseHistory ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           Purchase History shown here
           <div className="overflow-x-auto shadow-md rounded-lg">
           <table className="w-full text-xs text-left text-gray-500 dark:text-gray-400">

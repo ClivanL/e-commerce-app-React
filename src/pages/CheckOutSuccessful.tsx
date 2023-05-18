@@ -2,12 +2,14 @@ import Navbar from "../components/Navbar";
 import { useContext } from "react";
 import { CheckOutContext } from "../App";
 import { Cart } from "../../interfaces";
+import useRetrieveDetails from "../hooks/useRetrieveDetails";
 
 export default function CheckOutSuccessful(){
     const {checkOut}= useContext(CheckOutContext);
+    const {userDetails}= useRetrieveDetails();
     console.log(checkOut);
     return <>
-    <Navbar/>
+    <Navbar balance={userDetails?.balance!}/>
     You have successfully checked out:
     <table>
         <tbody>

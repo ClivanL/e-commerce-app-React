@@ -43,7 +43,7 @@ export default function ChangePassword() {
     <>
       {login || userDetails?.userId ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <p>Password Change</p>
           <form>
             <div>

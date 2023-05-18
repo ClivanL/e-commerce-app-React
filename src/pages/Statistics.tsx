@@ -8,7 +8,7 @@ export default function Statistics() {
     <>
       {userDetails?.userId ? (
         <div>
-          <Navbar />
+          <Navbar balance={userDetails?.balance!}/>
           <p className="text-xl font-extrabold">My Selling Statistics (Undeveloped feature)</p>
           <p className="text-lg font-bold">Most recent purchase</p>
           <p className="text-lg font-bold">Best selling item</p>

@@ -33,7 +33,7 @@ export default function Search() {
   }, [search, refresh]);
   return (
     <>
-      {userDetails?.userId ? <Navbar /> : <NavbarNoLogin />}
+      {userDetails?.userId ? <Navbar balance={userDetails?.balance!}/> : <NavbarNoLogin />}
       <div>
         <span className="text-lg font-bold">Search Results:</span>
       </div>
