@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import { IonIcon } from "react-ion-icon";
 import { Cart } from "../../interfaces";
+import affordable from "../functions/affordable";
 
 function MyCart() {
   const { userDetails, setUserDetails } = useRetrieveDetails();
@@ -14,8 +15,8 @@ function MyCart() {
   const login = useContext(LoginContext);
 
   const handleCheckOut = () => {
-    var resp:any;
-    fetch(`http://localhost:15555/api/main/cart/checkOutCart`, {
+    var resp: any;
+    fetch(`http://localhost:15555/api/main/axon/cart/checkOutCart`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -24,12 +25,14 @@ function MyCart() {
       body: JSON.stringify(userDetails),
     })
       .then((response) => {
-        resp=response;
-        return response.json();})
+        resp = response;
+        return response.json();
+      })
       .then((data) => {
-        if (resp.status===200) {
+        console.log(resp.status);
+        if (resp.status === 200) {
           setCheckOut(userDetails?.carts);
-          setUserDetails(data);
+          setUserDetails({ ...userDetails!, carts: [] });
           navigate("/checkout");
         } else {
           alert(data.message);
@@ -60,7 +63,12 @@ function MyCart() {
       }
     });
     if (newCart) {
-      setUserDetails({ ...userDetails!, carts: newCart, fulfillableCart:newCart.filter((item)=>!item.sufficient).length>0?false:true });
+      setUserDetails({
+        ...userDetails!,
+        carts: newCart,
+        fulfillableCart:
+          newCart.filter((item) => !item.sufficient).length > 0 ? false : true,
+      });
     }
   };
 
@@ -78,13 +86,18 @@ function MyCart() {
         "Content-Type": "application/json",
       },
     });
-    setUserDetails({ ...userDetails!, carts: newCart, fulfillableCart:newCart.filter((item)=>!item.sufficient).length>0?false:true });
+    setUserDetails({
+      ...userDetails!,
+      carts: newCart,
+      fulfillableCart:
+        newCart.filter((item) => !item.sufficient).length > 0 ? false : true,
+    });
   };
   return (
     <>
       {login || userDetails?.userId ? (
         <div>
-          <Navbar balance={userDetails?.balance!}/>
+          <Navbar balance={userDetails?.balance!} />
           <div className="text-3xl mb-2 font-extrabold">
             <IonIcon name="cart" /> My cart
           </div>
@@ -168,7 +181,8 @@ function MyCart() {
               <div className="mt-10">
                 {userDetails?.fulfillableCart &&
                 userDetails?.carts.filter((ele) => !ele.sufficient).length ===
-                  0 ? (
+                  0 &&
+                affordable(userDetails!) ? (
                   <button
                     className="bg-green-500 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-green-600"
                     onClick={handleCheckOut}
@@ -183,9 +197,29 @@ function MyCart() {
                     >
                       Check Out
                     </button>
-                    <p className="text-red-600 text-lg px-2 py-1 text-xs">
-                      Cart cannot be fulfilled, insufficient quantity!
-                    </p>
+                    {!userDetails?.fulfillableCart &&
+                    !(
+                      userDetails?.carts.filter((ele) => !ele.sufficient)
+                        .length === 0
+                    ) &&
+                    !affordable(userDetails!) ? (
+                      <div>
+                        <p className="text-red-600 px-2 py-1 text-xs">
+                          Cart cannot be fulfilled, insufficient quantity!
+                        </p>
+                        <p className="text-red-600 px-2 py-1 text-xs">
+                          Insufficient funds in account!
+                        </p>
+                      </div>
+                    ) : affordable(userDetails!) ? (
+                      <p className="text-red-600 px-2 py-1 text-xs">
+                        Cart cannot be fulfilled, insufficient quantity!
+                      </p>
+                    ) : (
+                      <p className="text-red-600 px-2 py-1 text-xs">
+                        Insufficient funds in account!
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
