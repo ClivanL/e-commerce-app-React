@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import useRetrieveDetails from "../hooks/useRetrieveDetails";
 import { CheckOutContext, LoginContext } from "../App";
@@ -10,6 +10,7 @@ import affordable from "../functions/affordable";
 
 function MyCart() {
   const { userDetails, setUserDetails } = useRetrieveDetails();
+  const [updatedCart, setUpdatedCart]=useState(true);
   const navigate = useNavigate();
   const { setCheckOut } = useContext(CheckOutContext);
   const login = useContext(LoginContext);
@@ -39,7 +40,32 @@ function MyCart() {
         }
       });
   };
+
+  const updateCart=()=>{
+    console.log("updating cart");
+    var resp:any;
+    fetch(`http://localhost:15555/api/main/cart/updateCart`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetails),
+    })
+      .then((response) => {
+        resp=response;
+        return response.json();
+      })
+      .then((data) => {
+        if (resp.status===200){
+          setUpdatedCart(true);
+        }
+          alert(data.message);
+      });
+  }
+
   const handleQuantityChange = (choice: String, itemId: number) => {
+    setUpdatedCart(false);
     const newCart: Cart[] = [];
     userDetails?.carts?.map((ele) => {
       if (ele.item.id === itemId) {
@@ -73,6 +99,7 @@ function MyCart() {
   };
 
   const handleDeleteItem = (cartId: number) => {
+    setUpdatedCart(false);
     const newCart: Cart[] = [];
     userDetails?.carts?.map((ele) => {
       if (ele.id !== cartId) {
@@ -179,6 +206,17 @@ function MyCart() {
                 </table>
               </div>
               <div className="mt-10">
+              {!updatedCart?<button
+                    className="bg-gray-400 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-gray-700 hover:text-white"
+                    onClick={updateCart}
+                  >
+                    Save Cart
+                  </button>:<button
+                    className="bg-gray-700 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded"
+                    disabled
+                  >
+                    Save Cart
+                  </button>}
                 {userDetails?.fulfillableCart &&
                 userDetails?.carts.filter((ele) => !ele.sufficient).length ===
                   0 &&

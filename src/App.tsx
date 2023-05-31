@@ -22,6 +22,7 @@ import LikedItems from './pages/LikedItems';
 import { Cart } from '../interfaces';
 import Search from './pages/Search';
 import Statistics from './pages/Statistics';
+import Payment from './pages/Payment';
 
 export const LoginContext= createContext<any>(null);
 export const SessionContext=createContext<any>(null);
@@ -49,6 +50,7 @@ function App(){
       <Route path="/category/:choice" element={<Catalog/>}/>
       <Route path="/category/:choice/:productid" element={<Product/>}/>
       <Route path="/mycart" element={<MyCart/>}/>
+      <Route path="/payment" element={<Payment/>}/>
       <Route path="/checkout" element={<CheckOutSuccessful/>}/>
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/purchasehistory" element={<PurchaseHistory/>}/>
