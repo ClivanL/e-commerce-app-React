@@ -10,7 +10,7 @@ import { Cart } from "../../interfaces";
 
 export default function Payment() {
   const { userDetails } = useRetrieveDetails();
-  const [paymentChoice, setPaymentChoice]=useState("");
+  const [paymentChoice, setPaymentChoice] = useState("");
   const navigate = useNavigate();
   const { checkOut } = useContext(CheckOutContext);
   const handlePayment = () => {
@@ -21,7 +21,7 @@ export default function Payment() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({...userDetails,carts:checkOut}),
+      body: JSON.stringify({ ...userDetails, carts: checkOut }),
     })
       .then((response) => {
         resp = response;
@@ -55,7 +55,7 @@ export default function Payment() {
               </tr>
             </thead>
             <tbody>
-              {checkOut?.map((ele:Cart) => (
+              {checkOut?.map((ele: Cart) => (
                 <tr key={ele.id}>
                   <th>{ele.item.itemName}</th>
                   <td>{ele.item.price}</td>
@@ -64,24 +64,39 @@ export default function Payment() {
                 </tr>
               ))}
               <tr>
-                <td><span className="font-bold">Total cost: </span></td>
+                <td>
+                  <span className="font-bold">Total cost: </span>
+                </td>
                 <td>${calculateTotal(checkOut)}</td>
               </tr>
               <tr>
-                <td><span className="font-bold">Payment choice:</span></td>
                 <td>
-                  <input type="radio" value="account" name="method" onChange={(e)=>setPaymentChoice(e.target.value)}/>
+                  <span className="font-bold">Payment choice:</span>
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    value="account"
+                    name="method"
+                    onChange={(e) => setPaymentChoice(e.target.value)}
+                  />
                   Account balance
                 </td>
                 <td>
-                <input type="radio" value="card" name="method" onChange={(e)=>setPaymentChoice(e.target.value)}/>
+                  <input
+                    type="radio"
+                    value="card"
+                    name="method"
+                    onChange={(e) => setPaymentChoice(e.target.value)}
+                  />
                   Credit Card
                 </td>
               </tr>
-
             </tbody>
           </table>
-          {affordable(userDetails?.balance,checkOut) || paymentChoice==="card" || paymentChoice===""? (
+          {affordable(userDetails?.balance, checkOut) ||
+          paymentChoice === "card" ||
+          paymentChoice === "" ? (
             <button
               className="bg-green-500 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-green-600"
               onClick={handlePayment}
