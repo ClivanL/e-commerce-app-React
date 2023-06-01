@@ -6,18 +6,24 @@ import { useNavigate } from "react-router-dom";
 import UserNotLoggedIn from "./UserNotLoggedIn";
 import { IonIcon } from "react-ion-icon";
 import { Cart } from "../../interfaces";
-import affordable from "../functions/affordable";
 
 function MyCart() {
   const { userDetails, setUserDetails } = useRetrieveDetails();
-  const [updatedCart, setUpdatedCart]=useState(true);
+  const [updatedCart, setUpdatedCart] = useState(true);
   const navigate = useNavigate();
-  const { setCheckOut } = useContext(CheckOutContext);
   const login = useContext(LoginContext);
+  const { setCheckOut } = useContext(CheckOutContext);
 
   const handleCheckOut = () => {
+    updateCart();
+    setCheckOut(userDetails?.carts)
+    navigate("/payment");
+  };
+
+  const updateCart = () => {
+    console.log("updating cart");
     var resp: any;
-    fetch(`http://localhost:15555/api/main/axon/cart/checkOutCart`, {
+    fetch(`http://localhost:15555/api/main/cart/updateCart`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -30,39 +36,13 @@ function MyCart() {
         return response.json();
       })
       .then((data) => {
-        console.log(resp.status);
         if (resp.status === 200) {
-          setCheckOut(userDetails?.carts);
-          setUserDetails({ ...userDetails!, carts: [] });
-          navigate("/checkout");
+          setUpdatedCart(true);
         } else {
           alert(data.message);
         }
       });
   };
-
-  const updateCart=()=>{
-    console.log("updating cart");
-    var resp:any;
-    fetch(`http://localhost:15555/api/main/cart/updateCart`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userDetails),
-    })
-      .then((response) => {
-        resp=response;
-        return response.json();
-      })
-      .then((data) => {
-        if (resp.status===200){
-          setUpdatedCart(true);
-        }
-          alert(data.message);
-      });
-  }
 
   const handleQuantityChange = (choice: String, itemId: number) => {
     setUpdatedCart(false);
@@ -206,21 +186,24 @@ function MyCart() {
                 </table>
               </div>
               <div className="mt-10">
-              {!updatedCart?<button
+                {!updatedCart ? (
+                  <button
                     className="bg-gray-400 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-gray-700 hover:text-white"
                     onClick={updateCart}
                   >
                     Save Cart
-                  </button>:<button
+                  </button>
+                ) : (
+                  <button
                     className="bg-gray-700 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded"
                     disabled
                   >
                     Save Cart
-                  </button>}
+                  </button>
+                )}
                 {userDetails?.fulfillableCart &&
                 userDetails?.carts.filter((ele) => !ele.sufficient).length ===
-                  0 &&
-                affordable(userDetails!) ? (
+                  0 ? (
                   <button
                     className="bg-green-500 text-2xl px-2 py-1 w-auto h-auto border-spacing-3 border rounded hover:bg-green-600"
                     onClick={handleCheckOut}
@@ -235,29 +218,9 @@ function MyCart() {
                     >
                       Check Out
                     </button>
-                    {!userDetails?.fulfillableCart &&
-                    !(
-                      userDetails?.carts.filter((ele) => !ele.sufficient)
-                        .length === 0
-                    ) &&
-                    !affordable(userDetails!) ? (
-                      <div>
-                        <p className="text-red-600 px-2 py-1 text-xs">
-                          Cart cannot be fulfilled, insufficient quantity!
-                        </p>
-                        <p className="text-red-600 px-2 py-1 text-xs">
-                          Insufficient funds in account!
-                        </p>
-                      </div>
-                    ) : affordable(userDetails!) ? (
-                      <p className="text-red-600 px-2 py-1 text-xs">
-                        Cart cannot be fulfilled, insufficient quantity!
-                      </p>
-                    ) : (
-                      <p className="text-red-600 px-2 py-1 text-xs">
-                        Insufficient funds in account!
-                      </p>
-                    )}
+                    <p className="text-red-600 px-2 py-1 text-xs">
+                      Cart cannot be fulfilled, insufficient quantity!
+                    </p>
                   </div>
                 )}
               </div>

@@ -1,9 +1,9 @@
-import { UserDetails } from "../../interfaces";
+import { Cart, UserDetails } from "../../interfaces";
 
-export default function affordable(userDetails: UserDetails) {
+export default function affordable(balance:number,carts: Cart[]) {
   return (
-    userDetails?.balance >=
-    userDetails?.carts.reduce((balance, ele) => {
+    balance >=
+    carts.reduce((balance, ele) => {
       return balance + ele.quantity * ele.item.price;
     }, 0)
   );
